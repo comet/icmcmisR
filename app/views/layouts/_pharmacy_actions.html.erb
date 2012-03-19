@@ -1,0 +1,8 @@
+<div id="submenu">
+  <ul class="subnav">
+  <li><%= link_to "Payment",payments_path(:custom=>'pharm') ,:class=>get_pharmacy_tab_class("payments")%></li>
+  <li><%= link_to "Current Stock",drugs_path,:class=>get_pharmacy_tab_class("current_stock") %></li>
+  <li><%= link_to "Sold Stock",sales_path,:class=>get_pharmacy_tab_class("sold_stock") %></li>
+  <li><%= link_to "Reconciliation",'#' %></li>
+  </ul>
+</div>

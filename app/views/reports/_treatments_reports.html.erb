@@ -1,0 +1,16 @@
+<%if @records.size>0%>
+<table class="data">
+  <tr>
+    <th>Treatment</th>
+  </tr>
+
+<% @records.each do |treatment| %>
+  <tr>
+    <td><%= link_to treatment.detail, treatment %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>
+<%if @current_encounter%>
+<%= link_to 'New Treatment', new_encounter_treatment_path(@current_enocunter),:class=>"button" %>
+<%end%>

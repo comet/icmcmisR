@@ -1,0 +1,28 @@
+<%if @payments.size>0%>
+<table class="data">
+  <tr>
+    <th>Amount</th>
+    <th>Payment for</th>
+    <th>Received by</th>
+    <th>Expected amount</th>
+    <th>Payment method</th>
+    <th>Status</th>
+  </tr>
+
+<% @payments.each do |payment| %>
+  <tr>
+    <td><%= payment.amount %></td>
+    <td><%= payment.payment_for %></td>
+    <td><%= payment.received_by %></td>
+    <td><%= payment.expeccted_amount %></td>
+    <td><%= payment.payment_method %></td>
+    <td><%= payment.status %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>
+<%if @current_encounter%>
+<%= link_to 'New Payment', new_encounter_payment_path,:class=>"button" %>
+<%else%>
+<%= link_to 'New Payment', new_payment_path,:class=>"button" %>
+<%end%>

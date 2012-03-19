@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  maximum_cover: 1.5
+  minimum_cover: 1.5
+
+two:
+  name: MyString
+  description: MyString
+  maximum_cover: 1.5
+  minimum_cover: 1.5

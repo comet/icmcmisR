@@ -1,0 +1,53 @@
+<div id="records">
+  <p>
+    <b>First name:</b>
+    <%= @user.first_name %>
+  </p>
+  <%if !@user.given_name.nil?%>
+    <p>
+      <b>Given name:</b>
+      <%= @user.given_name %>
+    </p>
+  <%end%>
+  <p>
+    <b>Surname:</b>
+    <%= @user.surname %>
+  </p>
+
+  <p>
+    <b>Gender:</b>
+    <%= @user.gender %>
+  </p>
+  <%if @user.address%>
+    <p>
+      <b>Address:</b>
+      <%= @user.address %>
+    </p>
+  <%end%>
+  <%if @user.phone_number%>
+    <p>
+      <b>Phone number:</b>
+      <%= @user.phone_number %>
+    </p>
+  <%end%>
+  <%if @user.alt_phone_number.nil?%>
+    <p>
+      <b>Alt phone number:</b>
+      <%= @user.alt_phone_number %>
+    </p>
+  <%end%>
+  <%if @user.birth_date%>
+    <p>
+      <b>Birth date:</b>
+      <%= @user.birth_date %>
+    </p>
+  <%end%>
+  <%  if @user.birth_date_estimate%>
+    <p>
+      <b>Birth date estimate:</b>
+      <%= @user.birth_date_estimate %>
+    </p>
+  <%end%>
+</div>
+<%= link_to 'Edit', edit_user_path(@user),:class=>"button" %> |
+<%= link_to 'Back', users_path ,:class=>"button"%>

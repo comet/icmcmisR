@@ -1,0 +1,78 @@
+<%= form_for(@patient) do |f| %>
+  <fieldset>
+    <legend>New patient</legend>
+    <table>
+
+      <% if @patient.errors.any? %>
+        <tr>
+          <!-- <div id="error_explanation">-->
+          <td><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:
+
+            <ul class="errors">
+              <% @patient.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <!--<div class="field">-->
+        <td><%= f.label :first_name %></td>
+        <td><%= f.text_field :first_name %></td>
+      </tr>
+      <tr>
+        <!--<div class="field">-->
+        <td><%= f.label :given_name %></td>
+        <td><%= f.text_field :given_name %></td>
+      </tr>
+      <tr>
+        <!--<div class="field">-->
+        <td><%= f.label :surname %></td>
+        <td> <%= f.text_field :surname %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= f.label :gender %></td>
+        <td><%= f.select(:gender, options_for_select([['Male', 'male'], ['Female', 'female']])) %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= f.label :address %></td>
+        <td><%= f.text_field :address %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= f.label :phone_number %></td>
+        <td><%= f.text_field :phone_number %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= f.label :alt_phone_number %></td>
+        <td><%= f.text_field :alt_phone_number %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= f.label :birth_date %></td>
+        <td id="date"><%= f.date_select :birth_date %></td>
+        <td><%= f.label :Or_Age %></td>
+        <td><%= f.text_field :birth_date_estimate %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= f.hidden_field :created_by,:value=>@current_user.id.to_i %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= label_tag(:alive, "Is alive") %></td>
+        <td><%= f.check_box(:alive) %></td>
+      </tr>
+
+      <!--<div class="actions">-->
+      <tr>
+        <td><%= f.submit %></td>
+        <td><%= link_to 'Back', patients_path,:class=>"button" %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>

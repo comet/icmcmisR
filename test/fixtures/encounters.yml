@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  complains: MyText
+  patient_id: 1
+  remarks: MyText
+
+two:
+  type: MyString
+  complains: MyText
+  patient_id: 1
+  remarks: MyText

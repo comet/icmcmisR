@@ -1,0 +1,16 @@
+<%if @billing_plans.size>0%>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @billing_plans.each do |billing_plan| %>
+  <tr>
+    <td><%= link_to billing_plan.name,billing_plan %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<div class="norecords">No records yet</div>
+<%end%>
+<%= link_to 'New Billing plan', new_billing_plan_path,:class=>"button" %>

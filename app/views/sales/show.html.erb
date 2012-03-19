@@ -1,0 +1,18 @@
+<div id="records">
+<p>
+  <b>Item:</b>
+  <%= @sale.item_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @sale.price %>
+</p>
+
+<p>
+  <b>Sold by:</b>
+  <%= @sale.sold_by %>
+</p>
+</div>
+<%= link_to 'Edit', edit_sale_path(@sale),:class=>"button" %> |
+<%= link_to 'Back', sales_path,:class=>"button" %>

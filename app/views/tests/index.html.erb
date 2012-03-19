@@ -1,0 +1,19 @@
+<table class="data">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Specific</th>
+  </tr>
+
+<% @tests.each do |test| %>
+  <tr>
+    <td><%= link_to test.name,test %></td>
+    <td><%= test.description %></td>
+    <td><%= test.specific_id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Test', new_test_path,:class=>"button" %>

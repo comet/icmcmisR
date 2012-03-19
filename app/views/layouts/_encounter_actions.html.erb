@@ -1,0 +1,10 @@
+<div id="submenu">
+  <ul class="subnav">
+  <li><%= link_to "Encounter details",encounter_path(@current_encounter),:class=>get_tab_class("encounters") %></li>
+  <li><%= link_to "Tests",encounter_performedtests_path(@current_encounter),:class=>get_tab_class("performedtests") %></li>
+  <li><%= link_to "Diagnoses",encounter_diagnoses_path(@current_encounter) ,:class=>get_tab_class("diagnoses")%></li>
+  <li><%= link_to "Treatments",encounter_treatments_path(@current_encounter),:class=>get_tab_class("treatments") %></li>
+  <li><%= link_to "Payments",encounter_payments_path(@current_encounter),:class=>get_tab_class("payments") %></li>
+  <li><%= link_to "Patient dashboard",patient_path(@current_patient) %></li>
+  </ul>
+</div>

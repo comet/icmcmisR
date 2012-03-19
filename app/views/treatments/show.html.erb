@@ -1,0 +1,8 @@
+<div id="records">
+<p>
+  <b>Detail:</b>
+  <%= @treatment.detail %>
+</p>
+</div>
+<%= link_to 'Edit', edit_treatment_path(@treatment),:class=>"button" %> |
+<%= link_to 'Back', encounter_treatments_path(@current_encounter),:class=>"button" %>

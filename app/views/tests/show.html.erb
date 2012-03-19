@@ -1,0 +1,23 @@
+<div id="records">
+<p>
+  <b>Name:</b>
+  <%= @test.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @test.description %>
+</p>
+<p>
+  <b>Price:</b>
+  <%= @test.price %>
+</p>
+<%if @test.other_info%>
+<p>
+  <b>Description:</b>
+  <%= @test.other_info %>
+</p>
+<%end%>
+</div>
+<%= link_to 'Edit', edit_test_path(@test),:class=>"button" %> |
+<%= link_to 'Back', tests_path,:class=>"button" %>

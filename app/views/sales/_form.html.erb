@@ -1,0 +1,32 @@
+<%= form_for(@sale) do |f| %>
+<fieldset>
+    <legend>New Sale</legend>
+    <table>
+  <% if @sale.errors.any? %>
+      <tr>
+      <td><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:
+
+      <ul>
+      <% @sale.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </div>
+  <% end %>
+  <tr class="field">
+    <td><%= f.label "Choose drug" %></td>
+    <td><%=select("Item", "item_id", Drug.all.collect {|t| [ t.name, t.id ] }, {:prompt => 'Select drug'})%></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :received_amount %></td>
+    <td><%= f.text_field :price %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.hidden_field :sold_by,:value=>@current_user.id.to_i %></td>
+  </tr>
+  <tr class="actions">
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back', sales_path,:class=>"button" %></td>
+  </tr>
+<% end %>

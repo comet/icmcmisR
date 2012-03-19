@@ -1,0 +1,25 @@
+<%if @users.size>0%>
+<table class="data">
+  <tr>
+
+    <th>Names</th>
+    <th>Gender</th>
+    <th>Address</th>
+    <th>Phone number</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <%name1=user.surname.concat(" ").concat(user.first_name) unless user.given_name.nil?%>
+    <%names =name1.concat(" ").concat(user.given_name) unless user.given_name.nil?%>
+    <td><%= link_to names,user %></td>
+    <td><%= user.gender %></td>
+    <td><%= user.address %></td>
+    <td><%= user.phone_number %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<h3>No records were found</h3>
+<%end%>
+<%= link_to "New User",new_user_path,:class=>"button" %>

@@ -1,0 +1,24 @@
+<%if @records.size>0%>
+<table class="data">
+  <tr>
+
+    <th>Names</th>
+    <th>Gender</th>
+    <th>Address</th>
+    <th>Phone number</th>
+  </tr>
+
+<% @records.each do |patient| %>
+  <tr>
+    <%name1=patient.surname.concat(" ").concat(patient.first_name) unless patient.given_name.nil?%>
+    <%names =name1.concat(" ").concat(patient.given_name) unless patient.given_name.nil?%>
+    <td><%= link_to names,patient %></td>
+    <td><%= patient.gender %></td>
+    <td><%= patient.address %></td>
+    <td><%= patient.phone_number %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<h3>No records were found</h3>
+<%end%>

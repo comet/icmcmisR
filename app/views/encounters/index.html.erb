@@ -1,0 +1,15 @@
+<%= link_to 'New Encounter', new_encounter_path,:class=>"button" %>
+<table class="data">
+  <tr>
+    <th>Complains</th>
+    <th>Remarks</th>
+    <th>Type</th>
+  </tr>
+<% @encounters.each do |encounter| %>
+  <tr class="<%= cycle("odd", "even")%>">
+    <td><%= link_to encounter.complains,encounter %></td>
+    <td><%= encounter.remarks %></td>
+    <td><%= encounter.encounter_type %></td>
+  </tr>
+<% end %>
+</table>

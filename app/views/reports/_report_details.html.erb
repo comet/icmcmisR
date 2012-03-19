@@ -1,0 +1,16 @@
+<%if @records%>
+  <%if @records.first.type%>
+
+    <%if @records.first.instance_of?Patient%>
+      <%=render :partial=>'patients_report'%>
+    <%elsif @records.first.instance_of?User%>
+      <%=render :partial=>'user_report'%>
+    <%elsif @records.first.instance_of?Encounter%>
+      <%=render :partial=>'encounter_report'%>
+<%elsif @records.first.instance_of?Treatment%>
+      <%=render :partial=>'treatments_reports'%>
+<%elsif @records.first.instance_of?Diagnosis%>
+      <%=render :partial=>'diagnosis_reports'%>
+    <%end%>
+  <%end%>
+<%end%>

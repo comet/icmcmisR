@@ -1,0 +1,19 @@
+<div id="patient" class="tabdiv">
+
+  <form method="get"action="/search/index/">
+                <fieldset>
+                     <legend>Find Patient(s)</legend>
+                     <table>
+                     <tr>
+                         <td><label for="name">Enter Patient Name:</label></td>
+                         <td><input type="text" name="name" id="name" size="50" maxlength="128" /></td>
+                         <td><input type="submit" name="search" value="search" id="search_type"/></td>
+                     </tr>
+
+                     </table>
+
+                </fieldset>
+                </form>
+
+<%= render 'form' %>
+</div>

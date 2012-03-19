@@ -1,0 +1,35 @@
+<%= form_for(@performedtest) do |f| %>
+<fieldset>
+    <legend>New Patient test</legend>
+    <table>
+
+  <% if @performedtest.errors.any? %>
+
+      <tr>
+      <td><%= pluralize(@performedtest.errors.count, "error") %> prohibited this performedtest from being saved:
+
+      <ul>
+      <% @performedtest.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+    <tr>
+      <td><%=select("test", "test_id", Test.all.collect {|t| [ t.name, t.id ] }, {:prompt => 'Select Test'})%></td>
+  </tr>
+  <tr>
+
+    <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.id.to_i %></td>
+  </tr>
+  <tr>
+    <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_i %></td>
+  </tr>
+  <tr>
+    <td><%= f.submit "Submit Test" %></td>
+    <td><%= link_to 'Back', performedtests_path,:class=>"button" %></td>
+  </tr>
+<% end %>
+    </table>
+</fieldset>

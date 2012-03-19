@@ -1,0 +1,45 @@
+<%= form_for(@test) do |f| %>
+<fieldset>
+    <legend>New test</legend>
+    <table>
+  <% if @test.errors.any? %>
+      <tr>
+    <!--<div id="error_explanation">-->
+      <td><%= pluralize(@test.errors.count, "error") %> prohibited this test from being saved:
+
+      <ul>
+      <% @test.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+    <tr>
+<!--  <div class="field">-->
+    <td><%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <!--<div class="field">-->
+  <tr>
+    <td><%= f.label :description %></td>
+    <td><%= f.text_field :description %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :price %></td>
+    <td><%= f.text_field :price %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :other_info %></td>
+    <td><%= f.text_area :other_info %></td>
+  </tr>
+  <!--<div class="field">-->
+
+  <!--<div class="actions">-->
+  <tr>
+    <td><%= f.submit %></td>
+    <td><%= link_to "Back",tests_path,:class=>"button" %></td>
+  </tr>
+<% end %>
+    </table>
+</fieldset>

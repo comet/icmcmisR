@@ -1,0 +1,35 @@
+<div id="patientsreports" class="reportsoptions">
+  <%=link_to 'All Patients',:controller=>"reports",:action=>"patients"%><br/>
+  <%=link_to 'Male Patients',:controller=>"reports",:action=>"patients",:query=>"male"%><br/>
+  <%=link_to 'Female Patients',:controller=>"reports",:action=>"patients",:query=>"female"%><br/>
+  <%=link_to 'Dead Patients',:controller=>"reports",:action=>"patients",:query=>"dead"%><br/>
+  <%=link_to 'Under five Patients',:controller=>"reports",:action=>"patients",:query=>"age"%><br/>
+  <%=link_to 'Custom Patients report',:controller=>"reports",:action=>"patients",:query=>"custom"%><br/>
+</div>
+<div id="encountersreports" class="reportsoptions">
+  <%=link_to 'Daily Encounters report',:controller=>"reports",:action=>"encounters",:query=>"daily"%><br/>
+  <%=link_to 'Custom Encounters report',:controller=>"reports",:action=>"encounters",:query=>"custom"%><br/>
+</div>
+<div id="diagnosesreports"class="reportsoptions">
+  <%=link_to 'Daily Diagnoses',:controller=>"reports",:action=>"diagnoses",:query=>"daily"%><br/>
+  <%=link_to 'Custom Diagnoses',:controller=>"reports",:action=>"diagnoses",:query=>"custom"%><br/>
+</div>
+<div id="treatmentsreports" class="reportsoptions">
+  <%=link_to 'Daily treatment report',:controller=>"reports",:action=>"treatments",:query=>"daily"%><br/>
+  <%=link_to 'Custom treatments report',:controller=>"reports",:action=>"treatments",:query=>"custom"%><br/>
+</div>
+<div id="Usersreports"class="reportsoptions">
+  <%=link_to 'All Users',:controller=>"reports",:action=>"users",:query=>"daily"%><br/>
+  <%=link_to 'Custom User reports',:controller=>"reports",:action=>"users",:query=>"daily"%><br/>
+</div>
+<div id="paymentsreports"class="reportsoptions">
+  <%=link_to 'All Payments','#'%><br/>
+  <%=link_to 'Custom Payments','#'%><br/>
+</div>
+<div id="pharmacyreports"class="reportsoptions">
+  <%=link_to 'All Drugs','#'%><br/>
+  <%=link_to 'Custom drug reports','#'%><br/>
+</div>
+<div id="adhocreports"class="reportsoptions">
+  <%=link_to 'Custom reports','#'%><br/>
+</div>

@@ -1,0 +1,16 @@
+<%if @drugs%>
+<table class="data">
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+  </tr>
+
+<% @drugs.each do |drug| %>
+  <tr>
+    <td><%= link_to drug.name,drug %></td>
+    <td><%= drug.price %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>
+<%= link_to 'New Drug', new_drug_path,:class=>"button" %>

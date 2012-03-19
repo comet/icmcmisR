@@ -1,0 +1,37 @@
+<%= form_for(@drug) do |f| %>
+<fieldset>
+    <legend>New Drug</legend>
+    <table>
+  <% if @drug.errors.any? %>
+      <tr>
+
+      <td><%= pluralize(@drug.errors.count, "error") %> prohibited this drug from being saved:
+      <ul>
+      <% @drug.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+  <tr class="field">
+    <td><%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :description %></td>
+    <td><%= f.text_area :description %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :category %></td>
+    <td><%= f.text_field :category %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :price %></td>
+    <td><%= f.text_field :price %></td>
+  </tr>
+  <tr class="actions">
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back', drugs_path,:class=>"button" %></td>
+  </tr>
+<% end %>

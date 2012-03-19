@@ -1,0 +1,76 @@
+<%= form_for(@user) do |f| %>
+<fieldset>
+    <legend>New Person</legend>
+    <table>
+  <% if @user.errors.any? %>
+      <tr>
+      <td><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      <td>
+    </tr>
+  <% end %>
+  <tr class="field">
+    <td><%= f.label :username %></td>
+    <td><%= f.text_field :username %></td>
+  </tr>
+<tr class="field">
+    <td><%= f.label :email %></td>
+    <td><%= f.text_field :email %></td>
+  </tr>
+<tr class="field">
+    <td><%= f.label :first_name %></td>
+    <td><%= f.text_field :first_name %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :given_name %></td>
+    <td><%= f.text_field :given_name %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :surname %></td>
+    <td><%= f.text_field :surname %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :gender %></td>
+    <td><%= f.select(:gender, options_for_select([['Male', 'male'], ['Female', 'female']])) %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :address %></td>
+    <td><%= f.text_field :address %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :phone_number %></td>
+    <td><%= f.text_field :phone_number %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :alt_phone_number %></td>
+    <td><%= f.text_field :alt_phone_number %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :birth_date %></td>
+    <td><%= f.datetime_select :birth_date %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :password %></td>
+    <td><%= f.password_field :password %></td>
+  </tr>
+
+   <tr class="field">
+    <td><%= f.label :secret_question %></td>
+    <td><%= f.text_field :secret_question %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :secret_answer %></td>
+    <td><%= f.text_field :secret_answer %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.hidden_field :created_by,:value=>@current_user.id.to_i %></td>
+  </tr>
+  <tr class="actions">
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back',users_path,:class=>'button' %></td>
+  </tr>
+<% end %>

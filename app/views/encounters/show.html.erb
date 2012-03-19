@@ -1,0 +1,22 @@
+<div id="records">
+<p>
+  <b>Type:</b>
+  <%= @encounter.encounter_type %>
+</p>
+
+<p>
+  <b>Complains:</b>
+  <%= @encounter.complains %>
+</p>
+
+<p>
+  <b>Remarks:</b>
+  <%= @encounter.remarks %>
+</p>
+<p>
+  <b>Visited:</b>
+  <%= time_ago(@encounter.created_at) %>
+</p>
+</div>
+<%= link_to 'Edit', edit_encounter_path(@encounter),:class=>"button" %> |
+<%= link_to 'Back', encounters_path ,:class=>"button"%>

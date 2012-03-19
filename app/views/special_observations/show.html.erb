@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ob name:</b>
+  <%= @special_observation.ob_name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @special_observation.description %>
+</p>
+
+<p>
+  <b>Doctor:</b>
+  <%= @special_observation.doctor_id %>
+</p>
+
+<p>
+  <b>Patient:</b>
+  <%= @special_observation.patient_id %>
+</p>
+
+<p>
+  <b>Other remarks:</b>
+  <%= @special_observation.other_remarks %>
+</p>
+
+
+<%= link_to 'Edit', edit_special_observation_path(@special_observation) %> |
+<%= link_to 'Back', special_observations_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ob_name: MyString
+  description: MyText
+  doctor_id: 1
+  patient_id: 1
+  other_remarks: MyText
+
+two:
+  ob_name: MyString
+  description: MyText
+  doctor_id: 1
+  patient_id: 1
+  other_remarks: MyText

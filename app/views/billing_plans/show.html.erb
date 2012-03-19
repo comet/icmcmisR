@@ -1,0 +1,23 @@
+<div id="records">
+<p>
+  <b>Name:</b>
+  <%= @billing_plan.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @billing_plan.description %>
+</p>
+
+<p>
+  <b>Maximum cover:</b>
+  <%= @billing_plan.maximum_cover %>
+</p>
+
+<p>
+  <b>Minimum cover:</b>
+  <%= @billing_plan.minimum_cover %>
+</p>
+</div>
+<%= link_to 'Edit', edit_billing_plan_path(@billing_plan),:class=>"button" %> |
+<%= link_to 'Back', billing_plans_path ,:class=>"button"%>

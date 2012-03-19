@@ -1,0 +1,49 @@
+<%= form_for(@payment) do |f| %>
+  <fieldset>
+    <legend>New Payment</legend>
+    <table>
+      <% if @payment.errors.any? %>
+        <tr>
+          <td><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:
+
+            <ul>
+              <% @payment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+      <%if @current_encounter%>
+        <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.to_i %></td>
+      <%else%>
+        <tr>
+          <td><%= render :partial=>"pay_for" %></td>
+        </tr>
+      <%end%>
+      <tr>
+        <td><%= f.hidden_field :received_by,:value=>@current_user.id.to_i %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :expected_amount %></td>
+        <td><%= f.label 0.00 %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :amount_paid %></td>
+        <td><%= f.text_field :amount %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :payment_method %></td>
+        <td><%=select("Payment", "payment_method", BillingPlan.all.collect {|t| [ t.name, t.name ] }, {:prompt => 'Select Payment Plan'})%></td>
+      </tr>
+      <tr>
+        <td><%= f.submit %></td>
+        <%if @current_encounter%>
+        <td><%= link_to 'Back', encounter_payments_path,:class=>"button" %></td>
+        <%else%>
+        <td><%= link_to 'Back', payments_path,:class=>"button" %></td>
+        <%end%>
+      </tr>
+    <% end %>
+    <table>
+      </fieldset>

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+<div id="records">
+<p>
+  <b>First name:</b>
+  <%= @person.first_name %>
+</p>
+<%if !@person.given_name.nil?%>
+  <p>
+    <b>Given name:</b>
+    <%= @person.given_name %>
+  </p>
+<%end%>
+<p>
+  <b>Surname:</b>
+  <%= @person.surname %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @person.gender %>
+</p>
+<%if @person.address%>
+  <p>
+    <b>Address:</b>
+    <%= @person.address %>
+  </p>
+<%end%>
+<%if @person.phone_number%>
+  <p>
+    <b>Phone number:</b>
+    <%= @person.phone_number %>
+  </p>
+<%end%>
+<%if @person.alt_phone_number.nil?%>
+  <p>
+    <b>Alt phone number:</b>
+    <%= @person.alt_phone_number %>
+  </p>
+<%end%>
+<%if @person.birth_date%>
+  <p>
+    <b>Birth date:</b>
+    <%= @person.birth_date %>
+  </p>
+<%end%>
+<%  if @person.birth_date_estimate%>
+  <p>
+    <b>Birth date estimate:</b>
+    <%= @person.birth_date_estimate %>
+  </p>
+<%end%>
+<% unless @person.alive==1%>
+  <p>
+    <b>Is Deceased</b>
+  </p>
+<% end%>
+</div>
+<%= link_to 'Edit', edit_person_path(@person),:class=>"button" %> |
+<%= link_to 'Back', people_path ,:class=>"button"%>

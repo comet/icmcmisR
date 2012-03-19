@@ -1,0 +1,11 @@
+<div id="submenu">
+  <ul class="subnav">
+  <li><%= link_to "Overview",patient_path(@current_patient),:class=>get_tab_class("overview") %></li>
+  <li><%= link_to "Encounters",patient_encounters_path(@current_patient.id.to_i),:class=>get_tab_class("encounters") %></li>
+  <li><%= link_to "Appointments",patient_appointments_path(@current_patient.id.to_i),:class=>get_tab_class("appointments") %></li>
+  <li><%= link_to "Tests",patient_performedtests_path(@current_patient.id.to_i),:class=>get_tab_class("performedtests")%></li>
+  <li><%= link_to "Diagnoses",patient_diagnoses_path(@current_patient.id.to_i),:class=>get_tab_class("diagnoses") %></li>
+  <li><%= link_to "Treatments",patient_treatments_path(@current_patient.id.to_i),:class=>get_tab_class("treatments") %></li>
+  <li><%= link_to "Special Observations",patient_special_observations_path(@current_patient.id.to_i) ,:class=>get_tab_class("special_observations")%></li>
+  </ul>
+</div>

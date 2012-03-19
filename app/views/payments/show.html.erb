@@ -1,0 +1,32 @@
+<div id="records">
+<p>
+  <b>Amount:</b>
+  <%= @payment.amount %>
+</p>
+
+<p>
+  <b>Payment for:</b>
+  <%= @payment.payment_for %>
+</p>
+
+<p>
+  <b>Received by:</b>
+  <%= @payment.received_by %>
+</p>
+
+<p>
+  <b>Expeccted amount:</b>
+  <%= @payment.expeccted_amount %>
+</p>
+
+<p>
+  <b>Payment method:</b>
+  <%= @payment.payment_method %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @payment.status %>
+</p>
+</div>
+<%= link_to 'Back', payments_path,:class=>"button" %>

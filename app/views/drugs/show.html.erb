@@ -1,0 +1,23 @@
+<div id="records">
+<p>
+  <b>Name:</b>
+  <%= @drug.name %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @drug.category %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @drug.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @drug.price %>
+</p>
+</div>
+<%= link_to 'Edit', edit_drug_path(@drug),:class=>"button" %> |
+<%= link_to 'Back', drugs_path,:class=>"button"%>

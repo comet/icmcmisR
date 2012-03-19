@@ -1,0 +1,30 @@
+<%if @records%>
+  <%if @records.eql?("blank")%>
+    <h1>No records found</h1>
+  <%else%>
+    <%=render :partial=>'report_details'%>
+  <%end%>
+<%elsif @custom%>
+  <%if @patient%>
+    <%=render :partial=>'patient'%>
+  <%elsif @user%>
+    <%=render :partial=>'user'%>
+  <%elsif @drug%>
+    <%=render :partial=>'drug'%>
+  <%elsif @billing_plan%>
+    <%=render :partial=>'billing_plan'%>
+  <%elsif @payment%>
+    <%=render :partial=>'payment'%>
+  <%elsif @treatment%>
+    <%=render :partial=>'treatment'%>
+  <%elsif @diagnosis%>
+    <%=render :partial=>'diagnosis'%>
+  <%elsif @test%>
+    <%=render :partial=>'test'%>
+  <%elsif @encounter%>
+    <%=render :partial=>'encounter'%>
+  <%elsif @specialobservation%>
+    <%=render :partial=>'special_observation'%>
+  <%else%>
+  <%end%>
+<%end%>

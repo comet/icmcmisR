@@ -1,0 +1,20 @@
+<%  if @people.size>0%>
+<table class="data">
+  <tr>
+    <th>Names</th>
+    <th>Gender</th>
+    <th>Address</th>
+  </tr>
+
+<% @people.each do |person| %>
+  <tr>
+    <%name1=person.surname.concat(" ").concat(person.first_name) unless person.given_name.nil?%>
+    <%names =name1.concat(" ").concat(person.given_name) unless person.given_name.nil?%>
+    <td><%= link_to names,person %></td>
+    <td><%= person.gender %></td>
+    <td><%= person.address %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>
+<%= link_to 'New Person', new_person_path,:class=>"button" %>

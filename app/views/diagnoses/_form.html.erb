@@ -1,0 +1,31 @@
+<%= form_for(@diagnosis) do |f| %>
+<fieldset>
+    <legend>New Diagnosis</legend>
+    <table>
+
+  <% if @diagnosis.errors.any? %>
+    <!--<div id="error_explanation">-->
+    <tr>
+      <td><%= pluralize(@diagnosis.errors.count, "error") %> prohibited this diagnosis from being saved:
+
+      <ul>
+      <% @diagnosis.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+    <tr>
+
+      <td><%= f.label :diagnosis %></td>
+      <td><%= f.text_area :detail %></td>
+      <td><%=f.hidden_field :encounter_id,:value=>@current_encounter%></td>
+    </tr>
+    <tr>
+      <td>    <%= f.submit %></td>
+      <td><%= link_to 'Back', diagnoses_path,:class=>"button" %></td>
+  </tr>
+<% end %>
+    </table>
+</fieldset>

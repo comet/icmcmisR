@@ -1,0 +1,13 @@
+<%if @records.size>0%>
+<table class="data">
+  <tr>
+    <th>Diagnosis</th>
+  </tr>
+
+<% @records.each do |diagnosis| %>
+  <tr>
+    <td><%= link_to  diagnosis.detail,diagnosis %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>

@@ -1,0 +1,61 @@
+<%= form_for(@doctor) do |f| %>
+  <% if @doctor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@doctor.errors.count, "error") %> prohibited this doctor from being saved:</h2>
+
+      <ul>
+        <% @doctor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :given_name %><br />
+    <%= f.text_field :given_name %>
+  </div>
+  <div class="field">
+    <%= f.label :surname %><br />
+    <%= f.text_field :surname %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.select(:gender, options_for_select([['Male', 'male'], ['Female', 'female']])) %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :alt_phone_number %><br />
+    <%= f.text_field :alt_phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_date %><br />
+    <%= f.datetime_select :birth_date %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_date_estimate %><br />
+    <%= f.text_field :birth_date_estimate %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :created_by,:value=>@current_user.id.to_i %>
+  </div>
+  <div class="field">
+    <%= f.check_box(:alive) %>
+    <%= label_tag(:alive, "Alive") %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

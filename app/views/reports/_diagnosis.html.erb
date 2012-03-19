@@ -1,0 +1,16 @@
+<%=form_tag%>
+<fieldset>
+    <legend>New Diagnosis report</legend>
+    <table>
+<%@diagnosis.each do |attrib|%>
+      <tr>
+      <td><%=label_tag attrib%></td>
+      <td><%=text_field_tag attrib%></td>
+      </tr>
+<%end%>
+      <%=render :partial=>'date_fields'%>
+      <tr>
+        <td><%=hidden_field_tag :model,:value=>params[:model]%></td>
+        <td><%=submit_tag :submit%></td></tr>
+    </table>
+</fieldset>

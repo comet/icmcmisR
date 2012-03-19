@@ -1,0 +1,58 @@
+<div id="records">
+<p>
+  <b>First name:</b>
+  <%= @patient.first_name %>
+</p>
+<%if !@patient.given_name.nil?%>
+  <p>
+    <b>Given name:</b>
+    <%= @patient.given_name %>
+  </p>
+<%end%>
+<p>
+  <b>Surname:</b>
+  <%= @patient.surname %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @patient.gender %>
+</p>
+<%if @patient.address%>
+  <p>
+    <b>Address:</b>
+    <%= @patient.address %>
+  </p>
+<%end%>
+<%if @patient.phone_number%>
+  <p>
+    <b>Phone number:</b>
+    <%= @patient.phone_number %>
+  </p>
+<%end%>
+<%if @patient.alt_phone_number.nil?%>
+  <p>
+    <b>Alt phone number:</b>
+    <%= @patient.alt_phone_number %>
+  </p>
+<%end%>
+<%if @patient.birth_date%>
+  <p>
+    <b>Born:</b>
+    <%= time_ago(@patient.birth_date) %>
+  </p>
+<%end%>
+<%  if @patient.birth_date_estimate%>
+  <p>
+    <b>Birth date estimate:</b>
+    <%= @patient.birth_date_estimate %>
+  </p>
+<%end%>
+<% unless @patient.alive==1%>
+  <p>
+    <b>Deceased</b>
+  </p>
+<% end%>
+</div>
+<%= link_to 'Edit', edit_patient_path(@patient),:class=>"button" %> |
+<%= link_to 'Back', patients_path ,:class=>"button"%>

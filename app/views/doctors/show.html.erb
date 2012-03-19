@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @doctor.first_name %>
+</p>
+<%if !@doctor.given_name.nil?%>
+  <p>
+    <b>Given name:</b>
+    <%= @doctor.given_name %>
+  </p>
+<%end%>
+<p>
+  <b>Surname:</b>
+  <%= @doctor.surname %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @doctor.gender %>
+</p>
+<%if @doctor.address%>
+  <p>
+    <b>Address:</b>
+    <%= @doctor.address %>
+  </p>
+<%end%>
+<%if @doctor.phone_number%>
+  <p>
+    <b>Phone number:</b>
+    <%= @doctor.phone_number %>
+  </p>
+<%end%>
+<%if @doctor.alt_phone_number.nil?%>
+  <p>
+    <b>Alt phone number:</b>
+    <%= @doctor.alt_phone_number %>
+  </p>
+<%end%>
+<%if @doctor.birth_date%>
+  <p>
+    <b>Birth date:</b>
+    <%= @doctor.birth_date %>
+  </p>
+<%end%>
+<%  if @doctor.birth_date_estimate%>
+  <p>
+    <b>Birth date estimate:</b>
+    <%= @doctor.birth_date_estimate %>
+  </p>
+<%end%>
+<% unless @doctor.alive==1%>
+  <p>
+    <b>Deceased</b>
+  </p>
+<% end%>
+<%= link_to 'Edit', edit_doctor_path(@doctor) %> |
+<%= link_to 'Back', doctors_path %>

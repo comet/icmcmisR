@@ -1,0 +1,18 @@
+<%if @sales.size>0 %>
+<table class="data">
+  <tr>
+    <th>Item</th>
+    <th>Price</th>
+    <th>Sold by</th>
+  </tr>
+
+<% @sales.each do |sale| %>
+  <tr>
+    <td><%= sale.name %></td>
+    <td><%= sale.price %></td>
+    <td><%= sale.surname.nil?? " ": sale.surname.concat( sale.first_name.nil?? " " : sale.first_name) %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>
+<%= link_to 'New Sale', new_sale_path,:class=>"button" %>

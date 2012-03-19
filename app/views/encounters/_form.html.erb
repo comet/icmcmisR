@@ -1,0 +1,39 @@
+<%= form_for(@encounter) do |f| %>
+<fieldset>
+    <legend>New Encounter</legend>
+    <table>
+
+  <% if @encounter.errors.any? %>
+      <tr>
+      <td><%= pluralize(@encounter.errors.count, "error") %> prohibited this encounter from being saved:
+
+      <ul>
+      <% @encounter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </td>
+    </tr>
+  <% end %>
+    <tr>
+    <td><%= f.label :encounter_type %></td>
+    <td><%= f.select(:encounter_type, options_for_select([['Initial Visit', 'Initial Visit'], ['Re-visit', 'Re-visit']])) %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :complains %></td>
+    <td><%= f.text_area :complains %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.hidden_field :patient_id, :value=>@current_patient.id.to_i%></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :remarks %></td>
+    <td><%= f.text_area :remarks %></td>
+  </tr>
+  <tr class="actions">
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back', patient_encounters_path(@current_patient),:class=>"button" %></td>
+  </tr>
+<% end %>
+    </table>
+</fieldset>

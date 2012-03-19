@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  amount: 1.5
+  payment_for: MyText
+  received_by: 1
+  expeccted_amount: 1.5
+  payment_method: MyString
+  status: 1
+
+two:
+  amount: 1.5
+  payment_for: MyText
+  received_by: 1
+  expeccted_amount: 1.5
+  payment_method: MyString
+  status: 1

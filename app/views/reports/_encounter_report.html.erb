@@ -1,0 +1,48 @@
+<%if @records.size>0%>
+  <table class="data">
+    <tr>
+      <th>Patient</th>
+      <th>Complains</th>
+      <th>Diagnosis</th>
+      <th>Treatment</th>
+      <th>Type</th>
+      <th>Date</th>
+    </tr>
+    <% @records.each do |encounter| %>
+      <tr>
+        <%if !encounter.patient.nil?%>
+          <td><%= link_to encounter.patient.surname,patient_path(encounter.patient_id) %></td>
+        <%else%>
+          <td>undefined</td>
+        <%end%>
+        <%if encounter.complains%>
+          <td><%= link_to encounter.complains,encounter %></td>
+        <%else%>
+          <td>undefined</td>
+        <%end%>
+        <%if encounter.diagnoses.size>0%>
+          <td><ul><%encounter.diagnoses.each do |diagnosis|%>
+                <li><%= diagnosis.detail %></li>
+              <%end%></ul></td>
+        <%else%>
+          <td>None defined</td>
+        <%end%>
+         <%if encounter.treatments.size>0%>
+          <td><ul><%encounter.treatments.each do |treatment|%>
+                <li><%= treatment.detail %></li>
+              <%end%></ul></td>
+        <%else%>
+          <td>None defined</td>
+        <%end%>
+        <%if encounter.encounter_type%>
+          <td><%= encounter.encounter_type %></td>
+        <%else%>
+          <td>undefined</td>
+        <%end%>
+        <td><%= time_ago(encounter.created_at) %></td>
+      </tr>
+    <% end %>
+  </table>
+<%else%>
+  <h3>No records found</h3>
+<%end%>

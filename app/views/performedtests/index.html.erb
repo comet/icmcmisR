@@ -1,0 +1,25 @@
+<%if @performedtests.size>0 %>
+<table class="data">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Cost</th>
+  </tr>
+
+<% @performedtests.each do |performedtest| %>
+  <tr>
+    <td><%= performedtest.name %></td>
+    <td><%= performedtest.description %></td>
+    <td><%= performedtest.price %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<div class="norecords">No records yet</div>
+<%end%>
+
+<%if @current_encounter%>
+<%= link_to 'New Test', new_encounter_performedtest_path(@current_encounter),:class=>"button" %>
+<%else%>
+<%link_to 'New Test', new_performedtest_path,:class=>"button"%>
+<%end%>

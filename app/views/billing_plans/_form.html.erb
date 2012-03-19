@@ -1,0 +1,38 @@
+<%= form_for(@billing_plan) do |f| %>
+<fieldset>
+    <legend>New Billing plan</legend>
+    <table>
+  <% if @billing_plan.errors.any? %>
+      <tr>
+      <td><%= pluralize(@billing_plan.errors.count, "error") %> prohibited this billing_plan from being saved:
+
+      <ul>
+      <% @billing_plan.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr class="field">
+    <td><%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+  </div>
+  <tr class="field">
+    <td><%= f.label :description %></td>
+    <td><%= f.text_area :description %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :maximum_cover %></td>
+    <td><%= f.text_field :maximum_cover %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :minimum_cover %></td>
+    <td><%= f.text_field :minimum_cover %></td>
+  </tr>
+  <tr class="actions">
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back', billing_plans_path,:class=>"button" %></td>
+  </tr>
+<% end %>

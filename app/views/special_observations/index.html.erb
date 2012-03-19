@@ -1,0 +1,15 @@
+<table class="data">
+  <tr>
+    <th>Observation name</th>
+  </tr>
+
+<% @special_observations.each do |special_observation| %>
+  <tr>
+    <td><%= link_to special_observation.ob_name, special_observation %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Special observation', new_special_observation_path,:class=>"button" %>

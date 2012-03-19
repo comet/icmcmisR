@@ -1,0 +1,503 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+    font-family: Verdana,sans-serif;
+    background-image:url('../images/bg.gif');
+    background-size:100% 30%;
+    background-repeat:no-repeat;
+}
+#pageBody {
+    position: relative;
+    min-height: 100%;
+}
+#logocell {
+    width: 61px;
+}
+.barsmall {
+    background-image:url(images/openmrs_green_bar_repeat.gif);
+    background-repeat:repeat-x;
+    height:27px;
+    margin-left: 0px;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    color: #ffffff;
+}
+#logosmall {
+    margin-left: 49px;
+    margin-top:2px;
+}
+#bannerbar {
+    text-align:center;
+    line-height:40px;
+    margin-top:-18px;
+    width:100%;
+}
+img.logo-reduced61 {
+    width:61px;
+    height:61px;
+}
+img.bar-round-reduced50 {
+    height:27px;
+    margin-left:-5px;
+    margin-top:0px;
+}
+.navList {
+    padding: 5px 0 2px 0;
+    margin: 0px;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+}
+.navList li {
+    padding: 0 15px 0 18px;
+    margin-top:0px;
+    border-left: 2px solid white;
+    display:inline;
+    line-height: 1.0em;
+    white-space: nowrap;
+    font-size: 1.3em;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+.navList > li:first-child {
+    border-left-style: none;
+}
+.navList li.firstChild {
+    /* IE hack to get around lack of first-child support */
+    border-left-style: none;
+}
+.navList a:link, .navList a:active, .navList a:visited,.navList a:hover {
+    text-decoration: none;
+    color: #ffffff;
+}
+* html #pageBody {
+    height: 100%;
+}
+* {
+    font-family: Verdana, 'Lucida Grande', 'Trebuchet MS', Arial, Sans-Serif;
+    -moz-box-sizing: border-box;  /* Use IE-like Border-Box model */
+}
+
+h1, h2, h3, h4, h5 {
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+a, a:link, a:hover, a:visited, a:active {
+    text-decoration: underline;
+    color: #ffffff;
+}
+a:hover {
+    text-decoration: none;
+    text-align: left;
+    z-index: 6;
+}
+
+#icmcmis_msg {
+    background: url(images/info.gif) no-repeat center left;
+    background-color: lightyellow;
+}
+
+#icmcmis_error {
+    background: url(images/error.gif) no-repeat center left;
+    background-color: lightpink;
+}
+
+#icmcmis_msg, #icmcmis_error {
+    margin-top: 3px;
+    margin-bottom: 5px;
+    border: 1px dashed lightgrey;
+    padding: 2px 2px 2px 18px;
+}
+
+#userBar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: right;
+    padding-top: 3px;
+    padding-right:5px;
+    margin: 0px;
+    z-index: 10;
+    width: 100%;
+    color: #333333;
+    line-height: 26px;
+}
+#userBar a:link, #userBar a:active, #userBar a:visited, #userBar a:hover,
+#content a.offColor, #content a.offColor:link, #content a.offColor:active, #content a.offColor:visited, #content a.offColor:hover {
+    color: #f57439;
+}
+#userBar span {
+    border-left: 1px solid #333333;
+    padding: 0 5px 0 5px;
+}
+#userBar > span:first-child {
+    border-left-style: none;
+}
+#userBar span.firstChild {
+    /* IE hack to get around lack of first-child support */
+    border-left-style: none;
+}
+#banner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    text-align: left;
+    z-index: 6;
+    width: 100%;
+}
+
+#content {
+    margin: 0px 0 0 0;
+    width: 100%;
+    padding: 80px 10px 10px 10px;	font-size: 1.2em;
+    background-color: #ffffff;
+    z-index: 8;
+}
+#content a, a:link, #content a:active, #content a:visited, #content a:hover {
+    color: #003366;
+}
+
+#contentMinimal {
+    margin: 0px 0 0 0;
+    width: 100%;
+    padding: 3px;
+    font-size: 1.2em;
+    background-color: #ffffff;
+    z-index: 8;
+}
+#contentMinimal a, a:link, #contentMinimal a:active, #contentMinimal a:visited, #contentMinimal a:hover {
+    color: #003366;
+}
+
+#footer {
+    position: relative;
+    margin-top: -1.7em;
+    width: 100%;
+    font-size: .8em;
+    text-align: left;
+    z-index: 0;
+    height: 1.7em;
+    background-color: #eeeeee;
+}
+#footer a, a:link, #footer a:active, #footer a:visited, #footer a:hover {
+    color: #003366;
+}
+
+#footer span {
+    margin-right: 5px;
+}
+
+#buildDate, #codeVersion, #databaseVersion, #databaseVersionError {
+    color: #999999;
+}
+
+#footerInner {
+    border-top: 1px solid #bbbbbb;
+}
+
+#footer #poweredBy {
+    float: right;
+}
+
+#footer #poweredBy img {
+    height: 1.4em;
+}
+
+#footer #poweredBy a, #poweredBy a:link, #poweredBy a:active, #poweredBy a:visited {
+    text-decoration: none;
+}
+
+#menu {
+    padding-left: 2px;
+}
+#menu li {
+    display: inline;
+    border-left: 1px solid black;
+    padding-left: 5px;
+    padding-right: 2px;
+    white-space: nowrap;
+}
+
+#menu li.first {
+    border-left-width: 0px;
+}
+
+#menu .active a{
+    font-weight: bold;
+    text-decoration: none;
+}
+#patientTable {
+    width: 100%;
+}
+
+thead th {
+    text-align: left;
+    font-weight: bold;
+}
+
+#patientSummary { font-size: 1.1em; }
+#patientSummary .boxHeader { font-size: 1.55em;}
+#patientSummary { /*width: 700px;*/ }
+#patientHeader {
+    text-align: left;
+    display: block;
+}
+#patientHeader a.offColor, #patientHeader a.offColor:link, #patientHeader a.offColor:active, #patientHeader a.offColor:visited, #patientHeader a.offColor:hover {
+    color: #ffffff;
+}
+#patientDashboardHeader td {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    vertical-align:bottom;
+    text-align:left;
+}
+table.patientEncounters {
+    width: 100%;
+    margin-right: 20px;
+    border:none;
+}
+#patientTabs {
+    margin: 10px auto 7px auto;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid navy;
+    width: 99%;
+}
+#patientTabs ul, #patientTabs li {
+    display: inline;
+    list-style-type: none;
+    padding: 0px 0px 0px 0px;
+}
+
+#patientTabs a:link, #patientTabs a:visited {
+    border: 1px solid navy;
+    font-size: small;
+    font-weight: bold;
+    margin-right: 8px;
+    padding: 2px 10px 2px 10px;
+    text-decoration: none;
+    color: navy;
+    background: #E0E0F0;
+}
+#patientTabs a:link.active, #patientTabs a:visited.active {
+    border-bottom: 1px solid #FFFFFF;
+}
+#patientTabs a.current, #patientTabs a:link.current, #patientTabs a:visited.current, #patientTabs a.current:hover {
+    background: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    color: navy;
+    text-decoration: none;
+}
+#patientTabs a:hover {
+    text-decoration: underline;
+}
+#content .boxHeader a:link, #content .boxHeader a, #content .boxHeader a:visited, #content .boxHeader a:hover {
+    color: white;
+}
+#selectFormForm {
+    padding: 2px;
+}
+#selectFormForm div {
+    margin-bottom: 7px;
+    font-size: 1.03em;
+}
+
+.retired, .voided, .retired *, .voided * {
+    text-decoration: line-through;
+}
+
+.error {
+    background-color: lightpink;
+}
+span.error, div.error {
+    border: 1px dashed darkred;
+    padding: 1px 6px 1px 6px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+input.error, textarea.error {
+    background-color: white;
+    color: darkred;
+}
+
+.tooltip {
+    border: 1px solid darkgrey;
+    background-color: #ffff80;
+    margin: 2px;
+    padding: 3px;
+}
+
+.button {
+    border: 1px solid darkgrey;
+    background-color: whitesmoke;
+    cursor: pointer;
+    margin: 2px;
+    padding: 3px;
+}
+input[type="text"], input[type="password"] {
+    padding: 1px;
+    border: 1px solid cadetblue;
+}
+
+input, select, textarea {
+    font-size: 0.9em;
+}
+.description {
+    font-size: .9em;
+    padding-left: 10px;
+    color: gray;
+}
+fieldset {
+    margin: 0px;
+    padding: 3px;
+    border: 1px solid cadetblue;
+}
+.tableTitle {
+    text-align: center;
+    background-color: whitesmoke;
+}
+.oddRow {
+    background-color: white;
+}
+
+.evenRow {
+    background-color: whitesmoke;
+}
+.alert {
+    margin-bottom: 1px;
+    padding: 0 2px 0 2px;
+    border-top: 1px dotted lightgrey;
+    background-color: white;
+}
+.alert:first-child {
+    border-top-width: 0px;
+}
+.alert.firstChild {
+    /* IE hack to get around lack of first-child support */
+    border-top-width: 0px;
+}
+
+#alertBar {
+    border-top: 1px solid lightgrey;
+    font-size: .8em;
+    font-weight: bold;
+    padding-left: 2px;
+    background-color: lightpink;
+}
+#alertBar img {
+    vertical-align: middle;
+}
+table.thinBorder {
+    border: 1px black solid;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    margin: 2px;
+}
+
+table.thinBorder td {
+    border: 1px black solid;
+    padding: 3px;
+}
+
+table.thinBorder th {
+    border: 1px black solid;
+    padding: 3px;
+}
+
+table.borderedTable {
+    border: 2px solid black;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    margin: 2px;
+}
+
+table.borderedTable th {
+    background-color: whitesmoke;
+    border: 2px solid black;
+    padding: 3px;
+}
+
+table.borderedTable td {
+    border: 1px solid black;
+    padding: 3px;
+}
+
+th.smallHeader {
+    font-weight: normal;
+    font-size: smaller;
+}
+#patientPrintableSummary {
+    font-size: 1.0em;
+}
+
+.highlighted, .highlight {
+    background-color: yellow;
+}
+.inline ul, .inline li {
+    display: inline;
+    list-style-type: none;
+    padding: 0px;
+}
+.forgotPasswordLink {
+    font-size: small;
+}
+.required {
+    color: red;
+    font-weight: bold;
+}
+.user .personName {
+    font-size: 0.8em;
+}
+/*
+body {
+    margin: 0 5px;
+    font-family: Verdana,sans-serif;
+    background-image:url('../images/bg.gif');
+    background-size:100% 70%;
+    background-repeat:no-repeat;
+}
+*/
+#footer{border-top:1px #abc solid;background:#d2e4ed url(../images/footer.gif) repeat-x 0 0;color:#555;padding:5px 0;}
+.copyright, #footer{clear:left;}
+.copyright, .tabs a, .nav a, .footer a, .logo, .bottom-nav a{text-align:center;}
+h1 {
+    font-size: 1.4em;
+    color: #008000;
+}
+
+a {
+    color: #008000;
+}
+
+/* Table */
+th {
+    text-align: left;
+}
+
+td, th {
+    padding-right: 5px;
+}
+
+/* style form */
+form dt {
+    width: 100px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+form dd {
+    margin-left: 0;
+    float: left;
+}
+
+form #submitbutton {
+    margin-left: 100px;
+}

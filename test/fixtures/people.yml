@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  first_name: MyString
+  given_name: MyString
+  surname: MyString
+  gender: MyString
+  address: MyString
+  phone_number: MyString
+  alt_phone_number: MyString
+  birth_date: 2012-03-02 22:40:15
+  birth_date_estimate: MyString
+  alive: 1
+  created_by: 1
+  personifiable_id: 1
+
+two:
+  first_name: MyString
+  given_name: MyString
+  surname: MyString
+  gender: MyString
+  address: MyString
+  phone_number: MyString
+  alt_phone_number: MyString
+  birth_date: 2012-03-02 22:40:15
+  birth_date_estimate: MyString
+  alive: 1
+  created_by: 1
+  personifiable_id: 1

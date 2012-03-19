@@ -1,0 +1,28 @@
+<%= form_for(@treatment) do |f| %>
+<fieldset>
+  <legend>New treatment</legend>
+  <table>
+  <% if @treatment.errors.any? %>
+    <tr>
+      <td><%= pluralize(@treatment.errors.count, "error") %> prohibited this treatment from being saved:
+
+      <ul>
+      <% @treatment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+    <tr>
+      <td><%= f.label :detail %></td>
+      <td><%= f.text_area :detail %></td>
+      <td><%= f.hidden_field :encounter_id,:value=>@current_encounter %></td>
+  </tr>
+  <tr>
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back', encounter_treatments_path(@current_encounter),:class=>"button" %></td>
+  </tr>
+<% end %>
+  </table>
+</fieldset>
