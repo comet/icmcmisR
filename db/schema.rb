@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317145425) do
+ActiveRecord::Schema.define(:version => 20120319104459) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "physician_id"

@@ -38,6 +38,7 @@ Icmcmis::Application.routes.draw do
 
   get "sessions/password"
   resources :payments
+  resources :billing_plans
   resources :performedtests
   resources :special_observations
   resources :encounters

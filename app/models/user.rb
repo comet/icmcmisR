@@ -19,6 +19,8 @@ class User < Person
     @password=pass
     self.salt = User.random_string(10) if !self.salt?
     self.hashed_password = User.encrypt(@password, self.salt)
+    Rails.logger.debug{self.hashed_password.inspect}
+    Rails.logger.debug{self.salt.inspect}
   end
   def self.encrypt(pass, salt)
     Digest::SHA1.hexdigest(pass+salt)
@@ -29,6 +31,8 @@ class User < Person
     u=find(:first, :conditions=>["username = ?", login])
 
     return nil if u.nil?
+    Rails.logger.debug{u.inspect}
+    Rails.logger.debug{User.encrypt(pass, u.salt)}
     return u if User.encrypt(pass, u.salt).eql?(u.hashed_password)
 
   end

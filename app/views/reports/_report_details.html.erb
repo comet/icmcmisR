@@ -7,9 +7,9 @@
       <%=render :partial=>'user_report'%>
     <%elsif @records.first.instance_of?Encounter%>
       <%=render :partial=>'encounter_report'%>
-<%elsif @records.first.instance_of?Treatment%>
+    <%elsif @records.first.instance_of?Treatment%>
       <%=render :partial=>'treatments_reports'%>
-<%elsif @records.first.instance_of?Diagnosis%>
+    <%elsif @records.first.instance_of?Diagnosis%>
       <%=render :partial=>'diagnosis_reports'%>
     <%end%>
   <%end%>
