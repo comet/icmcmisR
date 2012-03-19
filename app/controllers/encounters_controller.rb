@@ -7,7 +7,8 @@ class EncountersController < ApplicationController
   before_filter :ensure_encounter_actions,:only=>'show'
   def ensure_encounter_actions
     return if current_encounter
-    flash[:error]="You can only perform this action for an new encounter"
+    session[:encounter_id]=params[:encounter_id]
+    #flash[:error]="You can only perform this action for an new encounter"
   end
   def index
     if params[:patient_id]
@@ -32,8 +33,8 @@ class EncountersController < ApplicationController
     if @encounter
       session[:encounter_id]=@encounter.id.to_i
       #if params[:patient_id].eql?(current_patient.id.to_s)
-        @patientactions=false #disable the patients actions partial
-        #@encounteractions=true encounter actions enabled
+      @patientactions=false #disable the patients actions partial
+      #@encounteractions=true encounter actions enabled
       #end
     end
 
