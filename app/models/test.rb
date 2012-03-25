@@ -1,3 +1,3 @@
-class Test < ActiveRecord::Base
+class Test < Payable
   belongs_to :encounter
 end

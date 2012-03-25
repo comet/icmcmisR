@@ -1,2 +1,2 @@
-class Drug < ActiveRecord::Base
+class Drug < Payable
 end

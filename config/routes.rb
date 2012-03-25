@@ -1,5 +1,7 @@
 Icmcmis::Application.routes.draw do
 
+  resources :payables
+
   get "search/index"
 
   get "search/search"

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  time_out: 1
+  login_ip: MyString
+  login_status: MyString
+
+two:
+  user_id: 1
+  time_out: 1
+  login_ip: MyString
+  login_status: MyString

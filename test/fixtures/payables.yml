@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  type: MyString
+  encounter_id: 1
+  duration: 1
+  price: 1.5
+  other_info: MyText
+  category: MyString
+
+two:
+  name: MyString
+  description: MyText
+  type: MyString
+  encounter_id: 1
+  duration: 1
+  price: 1.5
+  other_info: MyText
+  category: MyString

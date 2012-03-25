@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @payable.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @payable.description %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @payable.type %>
+</p>
+
+<p>
+  <b>Encounter:</b>
+  <%= @payable.encounter_id %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @payable.duration %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @payable.price %>
+</p>
+
+<p>
+  <b>Other info:</b>
+  <%= @payable.other_info %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @payable.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_payable_path(@payable) %> |
+<%= link_to 'Back', payables_path %>

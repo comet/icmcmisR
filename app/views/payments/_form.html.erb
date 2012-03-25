@@ -26,7 +26,11 @@
       </tr>
       <tr>
         <td><%= f.label :expected_amount %></td>
+        <%if @current_encounter%>
         <td><%= f.label calculate_expected(@current_encounter.to_i)%></td>
+        <%else%>
+        <td><%= f.label 0%></td>
+        <%end%>
       </tr>
       <tr>
         <td><%= f.label :amount_paid %></td>
