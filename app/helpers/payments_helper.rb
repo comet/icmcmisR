@@ -21,4 +21,18 @@ module PaymentsHelper
     #end
     return test_price+treatment_price
   end
+  def calculate_expected_set(array_of_particulars)
+    if array_of_particulars.size==0
+      return 0
+    else
+      total =0.0
+      array_of_particulars.each do |particular|
+        price = particular.price
+        quantity = particular.quantity
+        sum = price * quantity
+        total+=sum
+      end
+      return total
+    end
+  end
 end

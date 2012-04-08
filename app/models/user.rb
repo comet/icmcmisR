@@ -1,13 +1,20 @@
 class User < Person
   require 'digest/sha1'
   validates_length_of :username, :within => 3..40
- # validates_length_of :password, :within => 5..40
+  # validates_length_of :password, :within => 5..40
   validates_presence_of :username, :email #:password :password_confirmation, :salt
   validates_uniqueness_of :username, :email
   #validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
   attr_protected :id, :salt
-  #has_one :person, :as => :personifiable
+  has_many :assignments
+  has_many :roles, :through => :assignments
+
+  def role_symbols
+    roles.map do |role|
+      role.name.underscore.to_sym
+    end
+  end
   def self.random_string(len)
     #generate a random password consisting of strings and digits
     chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
@@ -44,6 +51,6 @@ class User < Person
     Notifications.deliver_forgot_password(self.email, self.login, new_pass)
   end
   def handle_report(hash)
-return User.all
+    return User.all
   end
 end

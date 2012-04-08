@@ -34,6 +34,7 @@ class EncountersController < ApplicationController
       session[:encounter_id]=@encounter.id.to_i
       #if params[:patient_id].eql?(current_patient.id.to_s)
       @patientactions=false #disable the patients actions partial
+      ensure_encounter_actions
       #@encounteractions=true encounter actions enabled
       #end
     end

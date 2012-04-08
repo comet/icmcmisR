@@ -1,7 +1,17 @@
-<%= form_for(@payment) do |f| %>
-  <fieldset>
-    <legend>New Payment</legend>
-    <table>
+<fieldset>
+  <legend>New Payment</legend>
+  <table>
+    <tr>
+      <% if @particulars %>
+        <%= render :partial => "particular", :collection => @particulars, :as => :particular, :spacer_template => "spacer"%>
+      <% else %>
+        <td>No items yet</td>
+      <% end %>
+    </tr>
+    <tr>
+      <td><%= render :partial=>"pay_for" %></td>
+    </tr>
+    <%= form_for(@payment) do |f| %>
       <% if @payment.errors.any? %>
         <tr>
           <td><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:
@@ -17,9 +27,7 @@
       <%if @current_encounter%>
         <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.to_i %></td>
       <%else%>
-        <tr>
-          <td><%= render :partial=>"pay_for" %></td>
-        </tr>
+
       <%end%>
       <tr>
         <td><%= f.hidden_field :received_by,:value=>@current_user.id.to_i %></td>
@@ -27,9 +35,13 @@
       <tr>
         <td><%= f.label :expected_amount %></td>
         <%if @current_encounter%>
-        <td><%= f.label calculate_expected(@current_encounter.to_i)%></td>
+          <td><%= f.label calculate_expected(@current_encounter.to_i)%></td>
+          <td><%= f.hidden_field :expeccted_amount,:value=> calculate_expected(@current_encounter.to_i)%></td>
+        <%elsif @particulars%>
+          <td><%= f.label calculate_expected_set(@particulars)%></td>
+          <td><%= f.hidden_field :expeccted_amount,:value=> calculate_expected_set(@particulars)%></td>
         <%else%>
-        <td><%= f.label 0%></td>
+          <td><%= f.label 0%></td>
         <%end%>
       </tr>
       <tr>
@@ -43,9 +55,9 @@
       <tr>
         <td><%= f.submit %></td>
         <%if @current_encounter%>
-        <td><%= link_to 'Back', encounter_payments_path,:class=>"button" %></td>
+          <td><%= link_to 'Back', encounter_payments_path,:class=>"button" %></td>
         <%else%>
-        <td><%= link_to 'Back', payments_path,:class=>"button" %></td>
+          <td><%= link_to 'Back', payments_path,:class=>"button" %></td>
         <%end%>
       </tr>
     <% end %>

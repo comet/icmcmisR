@@ -1,0 +1,23 @@
+<p>
+  <b>Payment:</b>
+  <%= @particular.payment_id %>
+</p>
+
+<p>
+  <b>Payable:</b>
+  <%= @particular.payable_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @particular.user_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @particular.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_particular_path(@particular),:class=>"button" %>
+<%= link_to 'Back', particulars_path,:class=>"button" %>

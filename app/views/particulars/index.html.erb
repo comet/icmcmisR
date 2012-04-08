@@ -1,0 +1,29 @@
+<h1>Listing particulars</h1>
+
+<table>
+  <tr>
+    <th>Payment</th>
+    <th>Payable</th>
+    <th>User</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @particulars.each do |particular| %>
+  <tr>
+    <td><%= particular.payment_id %></td>
+    <td><%= particular.payable_id %></td>
+    <td><%= particular.user_id %></td>
+    <td><%= particular.status %></td>
+    <td><%= link_to 'Show', particular %></td>
+    <td><%= link_to 'Edit', edit_particular_path(particular) %></td>
+    <td><%= link_to 'Destroy', particular, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Particular', new_particular_path %>

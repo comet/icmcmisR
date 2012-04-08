@@ -78,7 +78,7 @@ jQuery.fn.deleteWithAjax = function() {
 
 //This will "ajaxify" the links
 function ajaxLinks(){
-    $('.ajaxForm').submitWithAjax();
+    $('a.ajaxForm').submitWithAjax();
     $('a.get').getWithAjax();
     $('a.post').postWithAjax();
     $('a.put').putWithAjax();

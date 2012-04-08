@@ -16,7 +16,9 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
     session[:patient]=@patient if @patient
-    Rails.logger.debug{current_patient.id.to_s}
+    #load current patient to the global variable to show the actions
+    #repeat to ensure session value has been set
+    load_patient_actions
     respond_to do |format|
       format.html #{render :layout=>'patientsactions'}# show.html.erb
       format.xml  { render :xml => @patient }

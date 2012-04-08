@@ -7,6 +7,7 @@ gem 'rails', '3.0.0'
 
 gem 'mysql2', '< 0.3'
 gem 'fastercsv'
+gem 'declarative_authorization'
 
 
 # Use unicorn as the web server

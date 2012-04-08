@@ -1,6 +1,6 @@
-<p id="notice"><%= notice %></p>
 <div id="records">
-<p>
+  <div>
+  <p>
   <b>First name:</b>
   <%= @person.first_name %>
 </p>
@@ -55,5 +55,8 @@
   </p>
 <% end%>
 </div>
-<%= link_to 'Edit', edit_person_path(@person),:class=>"button" %> |
+<div>
+<%= link_to 'Edit', edit_person_path(@person),:class=>"button" %>
 <%= link_to 'Back', people_path ,:class=>"button"%>
+</div>
+</div>

@@ -12,12 +12,11 @@ class SessionsController < ApplicationController
       if @login
       @session = Session.new(:user_id=>@login.id)
       @session.login_ip=request.remote_ip
-      end
       if session[:user] = User.authenticate(params[:user][:login], params[:user][:password])
         @session.login_status="success"
         if @session.save
-        flash[:message]  = "Login successful"
-        Rails.logger.debug{"Login was successful for "+params[:user][:login].to_s}
+        flash[:notice]  = "Welcome "+params[:user][:login]+",Your Login was successful"
+        #Rails.logger.debug{"Login was successful for "+params[:user][:login].to_s}
         if session[:return_to]
           @return =session[:return_to]
             session[:return_to] = nil
@@ -30,9 +29,13 @@ class SessionsController < ApplicationController
         @session.login_status="failed"
         if @session.save
         flash[:error] = "Login failed,please try again."
-        Rails.logger.debug{"Login failed for user "+params[:user][:login].to_s}
+       # Rails.logger.debug{"Login failed for user "+params[:user][:login].to_s}
         end
       end
+    else
+      flash[:error] = "Login failed,please try again."
+       # Rails.logger.debug{"Login failed for user "+params[:user][:login].to_s}
+    end
     end
   end
 
@@ -47,9 +50,9 @@ class SessionsController < ApplicationController
     if @session.save
     flash[:notice] = 'You have been successfully Logged out'
     else
-      flash[:error] = 'You have been Logged out but with an error'
+      flash[:error] = 'You have been Logged out but with errors'
       Rails.logger.error{"Session logout details were not updated correctly "}
-      Rails.logger.error{@session.inspect}
+      #Rails.logger.error{@session.inspect}
     end
     redirect_to root_url
   end

@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  filter_resource_access
   # GET /payments
   # GET /payments.xml
   def index
@@ -27,7 +28,8 @@ class PaymentsController < ApplicationController
   # GET /payments/1
   # GET /payments/1.xml
   def show
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find_detailed(params[:id])
+    #@particulars = Payment.includes[:particulars]
     if params[:encounter_id]
       load_encounter_actions #to set the encounter actions
     end
@@ -44,6 +46,8 @@ class PaymentsController < ApplicationController
     if !request.xhr?
       if params[:encounter_id]
         load_encounter_actions #to set the encounter actions
+      elsif params[:payload]
+        @particulars = Particular.details(session[:parts])
       end
     end
     respond_to do |format|
@@ -65,11 +69,17 @@ class PaymentsController < ApplicationController
     encounter=params[:payment][:encounter_id]
     respond_to do |format|
       if @payment.save
+        if Payment.bind_particulars(@payment.id, session[:parts])
+        #clear the parts from the variable
+        session[:parts]=nil
         if encounter
           format.html { redirect_to(encounter_payment_path(encounter,@payment), :notice => 'Payment was successfully Posted.') }
         else
           format.html { redirect_to(@payment, :notice => 'Payment was successfully Posted.') }
           format.xml  { render :xml => @payment, :status => :created, :location => @payment }
+        end
+        else
+          render :action => "new",:payload=>0
         end
       else
         format.html { render :action => "new" }

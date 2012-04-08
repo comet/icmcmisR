@@ -1,6 +1,7 @@
 Icmcmis::Application.routes.draw do
 
   resources :payables
+  resources :particulars
 
   get "search/index"
 
@@ -39,7 +40,9 @@ Icmcmis::Application.routes.draw do
   get "sessions/request_new"
 
   get "sessions/password"
-  resources :payments
+  resources :payments do
+    resources :particulars
+  end
   resources :billing_plans
   resources :performedtests
   resources :special_observations

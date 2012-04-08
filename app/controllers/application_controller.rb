@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   #ensure all operations are authorised
   before_filter :login_required
+  before_filter { |c| Authorization.current_user = c.current_user }
   def login_required
     return if logged_in?
     flash[:warning]='Please login to continue'
@@ -19,6 +20,7 @@ class ApplicationController < ActionController::Base
   end
   def load_patient_actions
     @patientactions=true
+    current_patient
   end
   def current_user
     @current_user = session[:user] if session[:user]
@@ -41,4 +43,10 @@ class ApplicationController < ActionController::Base
       redirect_to root and return
     end
   end
+  protected
+
+def permission_denied
+  flash[:error] = "Sorry, you are not allowed to access that page."
+  redirect_to :controller=>"dashboard"
+end
 end

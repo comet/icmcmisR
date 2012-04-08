@@ -10,13 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325160928) do
+ActiveRecord::Schema.define(:version => 20120406030858) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "physician_id"
     t.integer  "patient_id"
     t.string   "subject_matter"
     t.date     "appointment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.integer  "assigned_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,6 +67,16 @@ ActiveRecord::Schema.define(:version => 20120325160928) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encounter_type"
+  end
+
+  create_table "particulars", :force => true do |t|
+    t.integer  "payment_id"
+    t.integer  "payable_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   create_table "patients", :force => true do |t|
@@ -125,6 +143,14 @@ ActiveRecord::Schema.define(:version => 20120325160928) do
     t.datetime "updated_at"
     t.string   "test_results"
     t.text     "additional_comments"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sales", :force => true do |t|

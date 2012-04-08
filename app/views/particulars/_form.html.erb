@@ -1,0 +1,32 @@
+<%= form_for(@particular,:remote=>true) do |f| %>
+  <fieldset>
+    <legend>New item</legend>
+    <table>
+
+      <% if @particular.errors.any? %>
+        <tr>
+          <td><%= pluralize(@particular.errors.count, "error") %> prohibited this particular from being saved:
+
+            <ul>
+              <% @particular.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+
+      <tr class="field">
+        <td><%= f.hidden_field :payment_id %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :item %></td>
+        <td><%= f.text_field :payable_id %></td>
+        <td><%= f.submit %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.hidden_field :user_id %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>
