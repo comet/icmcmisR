@@ -1,0 +1,20 @@
+<%if @records.size>0%>
+<table class="data">
+  <tr>
+    <th>Amount</th>
+    <th>Received by</th>
+    <th>Expected amount</th>
+    <th>Payment method</th>
+  </tr>
+
+<% @records.each do |payment| %>
+  <tr>
+    <td><%= link_to payment.amount,'#' %></td>
+    
+    <td><%= payment.expeccted_amount %></td>
+    <td><%= payment.payment_method %></td>
+  </tr>
+<% end %>
+</table>
+<%end%>
+<%= will_paginate @records %>

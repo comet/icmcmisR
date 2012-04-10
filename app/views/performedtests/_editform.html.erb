@@ -1,0 +1,39 @@
+<%= form_for(@performedtest) do |f| %>
+  <fieldset>
+    <legend>New Patient lab request</legend>
+    <table>
+
+      <% if @performedtest.errors.any? %>
+
+        <tr>
+          <td><%= pluralize(@performedtest.errors.count, "error") %> prohibited this performedtest from being saved:
+
+            <ul>
+              <% @performedtest.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%=f.label :results%></td>
+        <td><%= f.select(:results, options_for_select([['Negative', 'negative'],['Positive', 'negative']])) %></td>
+      </tr>
+      <tr>
+        <td><%=f.label :comments%></td>
+        <td><%= f.text_area :comments%></td>
+      </tr>
+      <tr>
+        <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.id.to_i %></td>
+      </tr>
+      <tr>
+        <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_i %></td>
+      </tr>
+      <tr>
+        <td><%= f.submit "Update Test results" %></td>
+        <td><%= link_to 'Back', performedtests_path,:class=>"button" %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>

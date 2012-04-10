@@ -1,0 +1,12 @@
+<tr>
+  <td><%= label_tag :gender %></td>
+  <td><%= select_tag(:gender, options_for_select([['Male', 'male'], ['Female', 'female']])) %></td>
+</tr>
+<tr>
+  <td><%= label_tag :age %></td>
+  <td><%=  text_field_tag :age %></td>
+</tr>
+<tr>
+  <td><%= label_tag "Alive or dead" %></td>
+  <td><%= select_tag(:death, options_for_select([['Alive', '1'], ['Dead', '0']])) %></td>
+</tr>

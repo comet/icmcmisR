@@ -6,8 +6,9 @@
 
 <% @records.each do |diagnosis| %>
   <tr>
-    <td><%= link_to  diagnosis.detail,diagnosis %></td>
+    <td><%= diagnosis.detail %></td>
   </tr>
 <% end %>
 </table>
 <%end%>
+<%= will_paginate @records %>

@@ -2,12 +2,10 @@
 <fieldset>
     <legend>New Encounter report</legend>
     <table>
-<%@encounter.each do |attrib|%>
-      <tr>
-      <td><%=label_tag attrib%></td>
-      <td><%=text_field_tag attrib%></td>
-      </tr>
-<%end%>
+
+      <%=render :partial=>'encounter_filter'%>
+      <%=render :partial=>'diagnosis_filter'%>
+      <%=render :partial=>'treatment_filter'%>
       <%=render :partial=>'date_fields'%>
       <tr>
         <td><%=hidden_field_tag :model,:value=>params[:model]%></td>

@@ -8,7 +8,9 @@ gem 'rails', '3.0.0'
 gem 'mysql2', '< 0.3'
 gem 'fastercsv'
 gem 'declarative_authorization'
-
+gem 'will_paginate'
+#gem 'jquery-rails','< 3.0.0'
+gem  'jquery_datepicker'
 
 # Use unicorn as the web server
 # gem 'unicorn'

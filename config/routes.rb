@@ -16,7 +16,7 @@ Icmcmis::Application.routes.draw do
   post "reports/custom"
   get "reports/treatments"
   get "reports/users"
-
+  get "reports/payments"
   get "appointments/index"
 
   get "appointments/show"

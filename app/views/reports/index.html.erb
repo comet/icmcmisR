@@ -19,12 +19,12 @@
   <%=link_to 'Custom treatments report',:controller=>"reports",:action=>"treatments",:query=>"custom"%><br/>
 </div>
 <div id="Usersreports"class="reportsoptions">
-  <%=link_to 'All Users',:controller=>"reports",:action=>"users",:query=>"daily"%><br/>
-  <%=link_to 'Custom User reports',:controller=>"reports",:action=>"users",:query=>"daily"%><br/>
+  <%=link_to 'All Users',"#"%><br/>
+  <%=link_to 'Custom User reports',"#" %><br/>
 </div>
 <div id="paymentsreports"class="reportsoptions">
-  <%=link_to 'All Payments','#'%><br/>
-  <%=link_to 'Custom Payments','#'%><br/>
+  <%=link_to 'Daily Payments',:controller=>"reports",:action=>"payments",:query=>"daily"%><br/>
+  <%=link_to 'Custom Payments report',:controller=>"reports",:action=>"payments",:query=>"custom"%><br/>
 </div>
 <div id="pharmacyreports"class="reportsoptions">
   <%=link_to 'All Drugs','#'%><br/>

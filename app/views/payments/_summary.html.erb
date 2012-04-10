@@ -3,11 +3,11 @@
     <b>Total Cost: </b>
 <%=@payment.first.expeccted_amount%></p>
   <p>
+    <b>Amount Due: </b>
+    <b><%=@payment.first.expeccted_amount%></b></p>
+  <p>
     <b>Amount Received: </b>
 <%=@payment.first.amount%></p>
-  <p>
-    <b>Amount Due: </b>
-<%=@payment.first.expeccted_amount%></p>
   <p>
     <b>Balance amount: </b>
 <%=@payment.first.amount-(@payment.first.expeccted_amount.nil? ? 0:@payment.first.expeccted_amount)%></p>

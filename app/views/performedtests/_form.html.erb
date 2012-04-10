@@ -16,12 +16,10 @@
       </td>
     </tr>
   <% end %>
-    <tr>
-      <td><%=select("test", "test_id", Test.all.collect {|t| [ t.name, t.id ] }, {:prompt => 'Select Test'})%></td>
-  </tr>
+    <%=render :partial=>'tests'%>
   <tr>
 
-    <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.id.to_i %></td>
+    <td><%= f.hidden_field :encounter_id,:value=>@encounter %></td>
   </tr>
   <tr>
     <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_i %></td>

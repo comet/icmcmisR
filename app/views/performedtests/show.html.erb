@@ -1,21 +1,4 @@
 <%if @performedtest.size>0%>
-<div id="records">
-<% @performedtest.each do |performedtest| %>
-<p>
-  <b>Test:</b>
-  <%=  performedtest.name %>
-</p>
-
-<p>
-  <b>Encounter:</b>
-  <%= performedtest.description %>
-</p>
-
-<p>
-  <b>Patient:</b>
-  <%= performedtest.price %>
-</p>
-</div>
-<%end%>
+<%= render :partial=>'test',:collection=>@performedtest,:as=>:performedtest,:spacer=>'' %>
 <%end%>
 <%= link_to 'Back', encounter_performedtests_path(@current_encounter),:class=>"button" %>

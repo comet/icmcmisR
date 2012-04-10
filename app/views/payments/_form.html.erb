@@ -50,7 +50,7 @@
       </tr>
       <tr class="field">
         <td><%= f.label :payment_method %></td>
-        <td><%=select("Payment", "payment_method", BillingPlan.all.collect {|t| [ t.name, t.name ] }, {:prompt => 'Select Payment Plan'})%></td>
+        <td><%=select("payment", "payment_method", BillingPlan.all.collect {|t| [ t.name, t.name ] }, {:prompt => 'Select Payment Plan'})%></td>
       </tr>
       <tr>
         <td><%= f.submit %></td>
@@ -61,5 +61,5 @@
         <%end%>
       </tr>
     <% end %>
-    <table>
+    </table>
       </fieldset>

@@ -11,6 +11,8 @@
       <%=render :partial=>'treatments_reports'%>
     <%elsif @records.first.instance_of?Diagnosis%>
       <%=render :partial=>'diagnosis_reports'%>
+    <%elsif @records.first.instance_of?Payment%>
+      <%=render :partial=>'payments_report'%>
     <%end%>
   <%end%>
 <%end%>

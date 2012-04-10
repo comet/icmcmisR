@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   #ensure all operations are authorised
-  before_filter :login_required
+  before_filter :login_required,:load_array_paginator
   before_filter { |c| Authorization.current_user = c.current_user }
   def login_required
     return if logged_in?
@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     session[:return_to]=request.fullpath
     redirect_to :controller => "sessions", :action => "login"
     return false
+  end
+  def load_array_paginator
+    #Rails.logger.debug{"Loading paginator library"}
+    require 'will_paginate/array'
   end
   def logged_in?
     current_user

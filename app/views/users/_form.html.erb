@@ -50,8 +50,8 @@
     <td><%= f.text_field :alt_phone_number %></td>
   </tr>
   <tr class="field">
-    <td><%= f.label :birth_date %></td>
-    <td><%= f.datetime_select :birth_date %></td>
+    <td><%= f.label :role %></td>
+    <td><%=select("role", "role", Role.all.collect {|r| [ r.name, r.id ] }, {:prompt => 'Select User role'})%></td>
   </tr>
   <tr class="field">
     <td><%= f.label :password %></td>

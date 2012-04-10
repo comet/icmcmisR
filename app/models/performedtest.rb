@@ -7,4 +7,8 @@ class Performedtest < ActiveRecord::Base
   def self.patient_tests(hash)
     Performedtest.find_by_sql("SELECT * FROM `performedtests` INNER JOIN tests on performedtests.test_id=tests.id WHERE (`performedtests`.#{hash[:query_column]} = #{hash[:value]})")
   end
+  def self.lab_request_form(val = nil)
+    vals=Particular.process(val)
+    Performedtest.find_by_sql("SELECT * FROM `performedtests` INNER JOIN payables on performedtests.test_id=payables.id WHERE (`performedtests`.`id` IN (#{vals}))")
+  end
 end

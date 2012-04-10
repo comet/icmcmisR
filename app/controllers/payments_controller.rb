@@ -4,19 +4,23 @@ class PaymentsController < ApplicationController
   # GET /payments.xml
   def index
     if params[:patient_id]
-      @payments = Payment.find_all_by_patient_id(params[:patient_id])
+      hash = {:query_column=>"patient_id",:value=>params[:patient_id]}
+      #@payments = Payment.find_all_by_patient_id(params[:patient_id]).paginate(:page => params[:page], :per_page => 15)
+      @payments = Payment.payments_specific(hash)
     elsif params[:encounter_id]
-      @payments = Payment.find_all_by_encounter_id(params[:encounter_id])
+      hash = {:query_column=>"encounter_id",:value=>params[:encounter_id]}
+      #@payments = Payment.find_all_by_encounter_id(params[:encounter_id]).paginate(:page => params[:page], :per_page => 15)
+      @payments = Payment.payments_specific(hash)
       load_encounter_actions #to set the encounter actions
     elsif params[:custom]
       if params[:custom].eql?("pharm")
         pharmacy #load payment for pharmacy
-        @payments=Payment.all
+        @payments=Payment.paginate(:page => params[:page], :per_page => 15).all
       elsif params[:custom].eql?("tests")
         #load somthing for tests
       end
     else
-      @payments = Payment.all
+      @payments = Payment.paginate(:page => params[:page], :per_page => 15).find_detailed
     end
 
     respond_to do |format|
@@ -42,11 +46,17 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   # GET /payments/new.xml
   def new
+    if session[:pay_load]
+      @payment = session[:pay_load]
+      session[:pay_load]=nil#clear session
+    else
     @payment = Payment.new
+    end
     if !request.xhr?
       if params[:encounter_id]
         load_encounter_actions #to set the encounter actions
-      elsif params[:payload]
+      end
+      if params[:payload]
         @particulars = Particular.details(session[:parts])
       end
     end
@@ -79,10 +89,13 @@ class PaymentsController < ApplicationController
           format.xml  { render :xml => @payment, :status => :created, :location => @payment }
         end
         else
-          render :action => "new",:payload=>0
+          render :action => "new"
         end
       else
-        format.html { render :action => "new" }
+        format.html {
+          session[:pay_load]=@payment
+          redirect_to :action => "new",:payload=>0
+        }
         format.xml  { render :xml => @payment.errors, :status => :unprocessable_entity }
         format.js {render :layout => false}
       end

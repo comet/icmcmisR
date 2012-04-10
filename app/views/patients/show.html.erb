@@ -13,7 +13,6 @@
   <b>Surname:</b>
   <%= @patient.surname %>
 </p>
-
 <p>
   <b>Gender:</b>
   <%= @patient.gender %>
@@ -45,7 +44,7 @@
 <%  if @patient.birth_date_estimate%>
   <p>
     <b>Birth date estimate:</b>
-    <%= @patient.birth_date_estimate %>
+<%= @patient.birth_date_estimate %><span> years</span>
   </p>
 <%end%>
 <% unless @patient.alive==1%>
