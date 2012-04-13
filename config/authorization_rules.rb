@@ -18,15 +18,15 @@ authorization do
 
   role :labtech do
     includes :receptionist
-    has_permission_on :performedtests, :to => [:new, :create,:update]
+    has_permission_on :performedtests, :to => [:new, :create,:update,:index]
     #has_permission_on :articles, :to => [:edit, :update] do
     #  if_attribute :user => is { user }
     #end
   end
   role :cashier do
     includes :receptionist
-    has_permission_on :payments, :to => [:new, :create,:update]
-    has_permission_on :drugs, :to => [:new, :create,:update]
+    has_permission_on :payments, :to => [:new, :create,:update,:index]
+    has_permission_on :drugs, :to => [:new, :create,:update,:index]
     #has_permission_on :articles, :to => [:edit, :update] do
     #  if_attribute :user => is { user }
     #end
@@ -35,6 +35,7 @@ authorization do
     includes :labtech
     has_permission_on :diagnosis, :to => [:new, :create,:update]
     has_permission_on :treatments, :to => [:new,:create, :update]
+    #has_permission_
     #  if_attribute :user => is { user }
     #end
   end

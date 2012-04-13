@@ -1,0 +1,8 @@
+<div id="submenu">
+  <ul class="subnav">
+  <li><%= link_to "Overview",billing_plan_path(@current_plan.id.to_s),:class=>get_tab_class("overview") %></li>
+  <li><%= link_to "Claims",billing_plans_path(:bid=>@current_plan.id.to_s),:class=>get_tab_class("claims") %></li>
+  <li><%= link_to "Settlements",settlements_path(:id=>@current_plan.id.to_s),:class=>get_tab_class("settlements") %></li>
+  <li><%= link_to "Billing Plans",billing_plans_path,:class=>get_tab_class("billing_plans") %></li>
+  </ul>
+</div>

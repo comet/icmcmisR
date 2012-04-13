@@ -1,0 +1,15 @@
+<tr><div class="item">
+  <td><div >
+      <%=time_ago(particular.created_at)%>
+    </div></td>
+  <td><div>
+      <%=particular.expeccted_amount%>
+    </div></td>
+  <td><div class ="particulars_center">
+      <%=particular.amount%>
+    </div></td>
+  <td><div>
+      <b><%=particular.expeccted_amount - particular.amount%></b>
+    </div></td>
+</div>
+</tr>

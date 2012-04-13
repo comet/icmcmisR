@@ -1,0 +1,40 @@
+<%= form_for(@appointment) do |f| %>
+  <fieldset>
+    <legend>New Appointment</legend>
+    <table>
+      <% if @appointment.errors.any? %>
+        <!--div id="error_explanation">-->
+        <tr>
+          <td><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:
+
+            <ul>
+              <% @appointment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        <% end %>
+        </tr>
+      <tr class="field">
+        <td><%= f.hidden_field :set_by,:value=>@current_user.id.to_i %></td>
+        <td><%= f.hidden_field :patient_id,:value=>@current_user.id.to_i %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label "Appointment date" %></td>
+        <td><%= datepicker_input "","app_date"%></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :physician_id %></td>
+        <td><%=select("physician_id", "", Doctor.all.collect {|r| [ r.surname, r.id ] }, {:prompt => 'Select Physician'})%></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :subject_matter %></td>
+        <td><%= f.text_area :subject_matter %></td>
+      </tr>
+      <tr class="actions">
+        <td><%= f.submit %></td>
+        <td><%= link_to 'Back', appointments_path ,:class=>"button"%></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>

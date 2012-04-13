@@ -1,23 +1,28 @@
 <div id="records">
 <p>
   <b>Name:</b>
-  <%= @billing_plan.name %>
+<div><%= @billing_plan.name %></div>
 </p>
 
 <p>
   <b>Description:</b>
-  <%= @billing_plan.description %>
+  <div><%= @billing_plan.description %></div>
 </p>
 
 <p>
   <b>Maximum cover:</b>
-  <%= @billing_plan.maximum_cover %>
+  <div><%= @billing_plan.maximum_cover %></div>
 </p>
 
 <p>
   <b>Minimum cover:</b>
-  <%= @billing_plan.minimum_cover %>
+  <div><%= @billing_plan.minimum_cover %></div>
 </p>
+<div>
+<legend>Quick view</legend>
+<%=render :partial=>'summary'%>
 </div>
-<%= link_to 'Edit', edit_billing_plan_path(@billing_plan),:class=>"button" %> |
+
+<%= link_to 'Edit', edit_billing_plan_path(@billing_plan),:class=>"button" %>
 <%= link_to 'Back', billing_plans_path ,:class=>"button"%>
+</div>

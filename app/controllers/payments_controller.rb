@@ -6,21 +6,21 @@ class PaymentsController < ApplicationController
     if params[:patient_id]
       hash = {:query_column=>"patient_id",:value=>params[:patient_id]}
       #@payments = Payment.find_all_by_patient_id(params[:patient_id]).paginate(:page => params[:page], :per_page => 15)
-      @payments = Payment.payments_specific(hash)
+      @payments = Payment.payments_specific(hash).paginate(:page => params[:page], :per_page => 15)
     elsif params[:encounter_id]
       hash = {:query_column=>"encounter_id",:value=>params[:encounter_id]}
       #@payments = Payment.find_all_by_encounter_id(params[:encounter_id]).paginate(:page => params[:page], :per_page => 15)
-      @payments = Payment.payments_specific(hash)
+      @payments = Payment.payments_specific(hash).paginate(:page => params[:page], :per_page => 15)
       load_encounter_actions #to set the encounter actions
     elsif params[:custom]
       if params[:custom].eql?("pharm")
         pharmacy #load payment for pharmacy
-        @payments=Payment.paginate(:page => params[:page], :per_page => 15).all
+        @payments=Payment.find_detailed.paginate(:page => params[:page], :per_page => 15)
       elsif params[:custom].eql?("tests")
         #load somthing for tests
       end
     else
-      @payments = Payment.paginate(:page => params[:page], :per_page => 15).find_detailed
+      @payments = Payment.find_detailed.paginate(:page => params[:page], :per_page => 15)
     end
 
     respond_to do |format|

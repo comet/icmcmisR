@@ -17,7 +17,7 @@
 <% end %>
 </table>
 <%end%>
-
+<%= will_paginate @payments %>
 <%if @current_encounter%>
 <%= link_to 'New Payment', new_encounter_payment_path,:class=>"button" %>
 <%else%>

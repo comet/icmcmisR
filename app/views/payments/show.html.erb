@@ -1,3 +1,4 @@
+<%if @payment && @payment.size>0%>
 <div id="records">
   <p><b>Items purchased:</b></p>
   <table>
@@ -12,3 +13,6 @@
   <%= render :partial => "summary"%>
   <%= link_to 'Back', payments_path,:class=>"button" %>
 </div>
+<%else%>
+<div><p>No records found</p></div>
+<%end%>

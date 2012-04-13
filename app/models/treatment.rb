@@ -1,5 +1,8 @@
 class Treatment < ActiveRecord::Base
   belongs_to :encounter
+  def self.patient_treatments(patient_id)
+    Encounter.includes(:treatments).where("patient_id = ?",patient_id).all
+  end
   def self.handle_report(query_values)
     params = query_values || {} # Set params to empty hash if it's nil
     conditions = []

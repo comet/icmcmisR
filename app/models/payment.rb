@@ -19,13 +19,13 @@ class Payment < ActiveRecord::Base
   end
   def self.find_detailed(id=nil)
     if id.nil?
-    Payment.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,name,amount,username,expeccted_amount,payment_method FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by" )
+    Payment.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,name,amount,username,expeccted_amount,payment_method FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by ORDER BY payments.created_at DESC" )
     else
-    Payment.find_by_sql("SELECT * FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by WHERE payments.id=#{id}" )
+    Payment.find_by_sql("SELECT * FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by WHERE payments.id=#{id} payments.created_at" )
     end
     end
     def amount_is_enough
-      if amount < expeccted_amount
+      if amount && amount < expeccted_amount
         errors.add(:amount,"cannot be less than amount due")
       end
 

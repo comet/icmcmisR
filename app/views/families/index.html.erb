@@ -1,0 +1,18 @@
+<table class="data">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Maximum cover</th>
+    <th>Minimum cover</th>
+  </tr>
+
+<% @families.each do |family| %>
+  <tr>
+    <td><%= link_to family.name,family_path(family) %></td>
+    <td><%= family.description %></td>
+    <td><%= family.maximum_cover %></td>
+    <td><%= family.minimum_cover %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'New Family', new_family_path ,:class=>"button"%>

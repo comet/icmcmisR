@@ -14,10 +14,10 @@ class EncountersController < ApplicationController
     if params[:patient_id]
       if params[:patient_id].eql?(current_patient.id.to_s)
         @patientactions=true
+      @encounters = Patient.find(params[:patient_id]).encounters.order('created_at DESC').paginate(:page => params[:page], :per_page => 15)
       end
-      @encounters = Patient.find(params[:patient_id]).encounters
     else
-      @encounters = Encounter.all
+      @encounters = Encounter.paginate(:page => params[:page], :per_page => 15).all
     end
 
     respond_to do |format|

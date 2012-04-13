@@ -1,0 +1,28 @@
+<div id="records">
+  <%if @settlement_parts && @settlement_parts.size>0%>
+  <p><b>payments to be covered:</b></p>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Expected amount</th>
+      <th>Cash paid</th>
+      <th>Amount to be claimed</th>
+    </tr>
+    <%= render :partial => "particular", :collection => @settlement_parts, :as => :particular%>
+  </table>
+  <%end%>
+  <p>
+    <b>Amount:</b>
+    <%= @settlement.amount %>
+  </p>
+  <p>
+    <b>Expected amount:</b>
+    <%= @settlement.expeccted_amount %>
+  </p>
+  <p>
+    <b>Given by:</b>
+    <%= @settlement.received_from %>
+  </p>
+</div>
+<%= link_to 'Edit', edit_settlement_path(@settlement.id),:class=>"button" %>
+<%= link_to 'Back', settlements_path,:class=>"button" %>

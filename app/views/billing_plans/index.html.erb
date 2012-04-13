@@ -1,3 +1,4 @@
+<%if @billing_plans%>
 <%if @billing_plans.size>0%>
 <table>
   <tr>
@@ -10,7 +11,19 @@
   </tr>
 <% end %>
 </table>
+<%= will_paginate @billing_plans %>
 <%else%>
 <div class="norecords">No records yet</div>
 <%end%>
 <%= link_to 'New Billing plan', new_billing_plan_path,:class=>"button" %>
+<%  elsif @claims.size>0%>
+<div>
+<table class="data">
+  <th>Amount paid</th>
+  <th>Expected amount</th>
+  <th>Insurer</th>
+<%= render :partial=>'claims',:collection=>@claims,:as=>:payment,:spacer=>'' %>
+  </table>
+</div>
+<%= will_paginate @claims %>
+<%end%>

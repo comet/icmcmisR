@@ -1,0 +1,38 @@
+<%= form_for(@family) do |f| %>
+<fieldset>
+    <legend>New Billing plan</legend>
+    <table>
+  <% if @family.errors.any? %>
+      <tr>
+      <td><%= pluralize(@family.errors.count, "error") %> prohibited this family from being saved:
+
+      <ul>
+      <% @family.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr class="field">
+    <td><%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+  </div>
+  <tr class="field">
+    <td><%= f.label :description %></td>
+    <td><%= f.text_area :description %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :maximum_cover %></td>
+    <td><%= f.text_field :maximum_cover %></td>
+  </tr>
+  <tr class="field">
+    <td><%= f.label :minimum_cover %></td>
+    <td><%= f.text_field :minimum_cover %></td>
+  </tr>
+  <tr class="actions">
+    <td><%= f.submit %></td>
+    <td><%= link_to 'Back', families_path,:class=>"button" %></td>
+  </tr>
+<% end %>

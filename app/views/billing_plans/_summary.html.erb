@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th><span>Total claims</span></th>
+    <th><span>Total Settlement</span></th>
+    <th><span>Pending amount</span></th>
+  </tr>
+  <tr>
+    <td><h2><%=calculate_bp_summary(@claims,@setts,'claims')%></h2></td>
+
+    <td>
+      <h2><%=calculate_bp_summary(@claims,@setts,'settle')%></h2>
+    </td>
+    <td>
+      <h2><%=calculate_bp_summary(@claims,@setts,'total')%></h2>
+    </td>
+  </tr>
+
+</table>

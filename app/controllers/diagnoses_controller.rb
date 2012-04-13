@@ -7,16 +7,16 @@ class DiagnosesController < ApplicationController
       if params[:patient_id].eql?(current_patient.id.to_s)
         @patientactions=true
         @poly=true
-        @diagnoses=Diagnosis.patient_diagnoses(params[:patient_id])
-        Rails.logger.debug{@diagnoses.inspect}
+        @diagnoses=Diagnosis.order('created_at DESC').patient_diagnoses(params[:patient_id]).paginate(:page => params[:page], :per_page => 15)
+        #Rails.logger.debug{@diagnoses.inspect}
       end
 
     elsif params[:encounter_id]
-      @diagnoses = Encounter.find(params[:encounter_id]).diagnoses
-      Rails.logger.debug{@diagnoses.inspect}
+      @diagnoses = Encounter.find(params[:encounter_id]).diagnoses.order('created_at DESC').paginate(:page => params[:page], :per_page => 15)
+      #Rails.logger.debug{@diagnoses.inspect}
       load_encounter_actions #to set the encounter actions
     else
-      @diagnoses = Diagnosis.all
+      @diagnoses = Diagnosis.order('created_at DESC').all.paginate(:page => params[:page], :per_page => 15)
     end
 
 

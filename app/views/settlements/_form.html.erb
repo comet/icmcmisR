@@ -1,0 +1,60 @@
+<fieldset>
+  <legend>New Settlement</legend>
+  <table>
+    <tr>
+      <% if @claimparticulars &&@claimparticulars.size>0 %>
+    <td>
+      <table>
+        <th>Date of transaction</th>
+        <th>Amount Charged</th>
+        <th>Amount Paid </th>
+        <th>Amount Due</th>
+        <%= render :partial => "particular", :collection => @claimparticulars, :as => :particular, :spacer_template => "payments/spacer"%>
+      </table>
+    </td>
+      <% else %>
+        <td>No pending settlements yet</td>
+      <% end %>
+    </tr>
+    <%= form_for(@settlement) do |f| %>
+      <% if @settlement.errors.any? %>
+        <tr>
+          <td><%= pluralize(@settlement.errors.count, "error") %> prohibited this payment from being saved:
+
+            <ul>
+              <% @settlement.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= f.hidden_field :received_by,:value=>@current_user.id.to_i %></td>
+        <td><%= f.hidden_field :payment_method,:value=>"CASH" %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :expected_amount %></td>
+        <%if @claimparticulars%>
+        <td><%= f.label calculate_expected_settlement(@claimparticulars) %></td>
+        <td><%= f.hidden_field :expeccted_amount,:value=> calculate_expected_settlement(@claimparticulars)%></td>
+        <%else%>
+        <td><%= f.label 0%></td>
+        <td><%= f.hidden_field :expeccted_amount,:value=> 0%></td>
+        <%end%>
+      </tr>
+      <tr>
+        <td><%= f.label :amount_paid %></td>
+        <td><%= f.text_field :amount %></td>
+      </tr>
+      <tr class="field">
+        <td><%= label_tag :paid_by %></td>
+        <td><%= f.text_field :received_from %></td>
+      </tr>
+      <tr class="actions">
+        <td><%= f.submit %></td>
+        <td><%= link_to 'Back', settlements_path,:class=>"button" %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>

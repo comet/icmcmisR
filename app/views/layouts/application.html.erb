@@ -21,6 +21,8 @@
     <%= render :partial=> 'layouts/pharmacy_actions' %>
     <%elsif @current_encounter%>
       <%= render :partial=> 'layouts/encounter_actions' %>
+    <%elsif @current_plan%>
+      <%= render :partial=> 'layouts/billing_plans_action' %>
     <%end%>
     <div id="pageBody">
       <%= yield %>

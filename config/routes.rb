@@ -1,5 +1,13 @@
 Icmcmis::Application.routes.draw do
 
+  resources :appointments
+
+  resources :claim_particulars
+
+  resources :settlements
+
+  resources :families
+
   resources :payables
   resources :particulars
 

@@ -35,6 +35,9 @@ class ApplicationController < ActionController::Base
   def current_encounter
     @current_encounter = session[:encounter_id] if session[:encounter_id]
   end
+  def current_plan
+    @current_plan = session[:plan] if session[:plan]
+  end
   def pharmacy
     @pharmacy=true
   end

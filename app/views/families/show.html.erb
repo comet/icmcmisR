@@ -1,0 +1,23 @@
+<div id="records">
+<p>
+  <b>Name:</b>
+  <%= @family.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @family.description %>
+</p>
+
+<p>
+  <b>Maximum cover:</b>
+  <%= @family.maximum_cover %>
+</p>
+
+<p>
+  <b>Minimum cover:</b>
+  <%= @family.minimum_cover %>
+</p>
+</div>
+<%= link_to 'Edit', edit_family_path(@family),:class=>"button" %>
+<%= link_to 'Back', families_path ,:class=>"button"%>

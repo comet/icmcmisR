@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  amount: 1.5
+  expected_amount: 1.5
+  given_by: MyString
+
+two:
+  amount: 1.5
+  expected_amount: 1.5
+  given_by: MyString

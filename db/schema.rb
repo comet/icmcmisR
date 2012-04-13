@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410144110) do
+ActiveRecord::Schema.define(:version => 20120413034530) do
 
   create_table "appointments", :force => true do |t|
-    t.integer  "physician_id"
     t.integer  "patient_id"
+    t.date     "app_date"
+    t.integer  "physician_id"
+    t.integer  "set_by"
     t.string   "subject_matter"
-    t.date     "appointment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,6 +35,15 @@ ActiveRecord::Schema.define(:version => 20120410144110) do
     t.string   "description"
     t.float    "maximum_cover"
     t.float    "minimum_cover"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type"
+  end
+
+  create_table "claim_particulars", :force => true do |t|
+    t.float    "amount"
+    t.float    "expeccted_amount"
+    t.string   "given_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +79,15 @@ ActiveRecord::Schema.define(:version => 20120410144110) do
     t.string   "encounter_type"
   end
 
+  create_table "families", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.float    "maximum_cover"
+    t.float    "minimum_cover"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "particulars", :force => true do |t|
     t.integer  "payment_id"
     t.integer  "payable_id"
@@ -77,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20120410144110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quantity"
+    t.string   "type"
+    t.string   "given_by"
   end
 
   create_table "patients", :force => true do |t|
@@ -107,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20120410144110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "encounter_id"
+    t.string   "type"
+    t.string   "received_from"
   end
 
   create_table "people", :force => true do |t|
@@ -168,6 +191,14 @@ ActiveRecord::Schema.define(:version => 20120410144110) do
     t.integer  "time_out"
     t.string   "login_ip"
     t.string   "login_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settlements", :force => true do |t|
+    t.float    "amount"
+    t.float    "expected_amount"
+    t.string   "given_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

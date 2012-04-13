@@ -42,7 +42,12 @@ class ParticularsController < ApplicationController
   # POST /particulars
   # POST /particulars.xml
   def create
+    #session[:parts]=nil
     @particular = Particular.new(params[:particular])
+    if params[:particular][:quantity].blank?
+      
+      @particular.quantity=1 #ensure quantity is one or more
+    end
 
     respond_to do |format|
       if @particular.save

@@ -1,0 +1,21 @@
+<%if @settlements && @settlements.size>0%>
+<table class="data">
+  <tr>
+    <th>Amount</th>
+    <th>Expected amount</th>
+    <th>Given by</th>
+    <th>Date</th>
+  </tr>
+
+<% @settlements.each do |settlement| %>
+  <tr>
+    <td><%= link_to settlement.amount,settlement_path(settlement) %></td>
+    <td><%= settlement.expeccted_amount %></td>
+    <td><%= settlement.received_from %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<div>No records</div>
+<%end%>
+<%= link_to 'New Settlement', new_settlement_path,:class=>"button "%>

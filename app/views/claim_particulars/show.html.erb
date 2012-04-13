@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Amount:</b>
+  <%= @claim_particular.amount %>
+</p>
+
+<p>
+  <b>Expeccted amount:</b>
+  <%= @claim_particular.expeccted_amount %>
+</p>
+
+<p>
+  <b>Given by:</b>
+  <%= @claim_particular.given_by %>
+</p>
+
+
+<%= link_to 'Edit', edit_claim_particular_path(@claim_particular) %> |
+<%= link_to 'Back', claim_particulars_path %>

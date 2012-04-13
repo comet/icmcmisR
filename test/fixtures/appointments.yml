@@ -1,13 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  physician_id: 1
   patient_id: 1
+  app_date: 2012-04-13
+  physician_id: 1
+  set_by: 1
   subject_matter: MyString
-  appointment_date: 2012-03-02
 
 two:
-  physician_id: 1
   patient_id: 1
+  app_date: 2012-04-13
+  physician_id: 1
+  set_by: 1
   subject_matter: MyString
-  appointment_date: 2012-03-02

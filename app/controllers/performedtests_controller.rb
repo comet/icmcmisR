@@ -7,16 +7,16 @@ class PerformedtestsController < ApplicationController
         @patientactions=true
         #create
         query_string ={:query_column=>'patient_id',:value=>params[:patient_id]}
-        @performedtests = Performedtest.patient_tests(query_string)#joins("test").find_all_by_patient_id(params[:patient_id])
+        @performedtests = Performedtest.order('created_at DESC').patient_tests(query_string).paginate(:page => params[:page], :per_page => 15)#joins("test").find_all_by_patient_id(params[:patient_id])
       end
 
     elsif params[:encounter_id]
       query_string ={:query_column=>'encounter_id',:value=>params[:encounter_id]}
-      @performedtests = Performedtest.patient_tests(query_string)
+      @performedtests = Performedtest.order('created_at DESC').patient_tests(query_string).paginate(:page => params[:page], :per_page => 15)
       #@performedtests = Encounter.find(params[:encounter_id]).performedtests
       load_encounter_actions #to set the encounter actions
     else
-      @performedtests = Performedtest.joins("INNER JOIN tests on performedtests.test_id=tests.id").all
+      @performedtests = Performedtest.order('created_at DESC').joins("INNER JOIN tests on performedtests.test_id=tests.id").all.paginate(:page => params[:page], :per_page => 15)
     end
 
     respond_to do |format|

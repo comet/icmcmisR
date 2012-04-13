@@ -5,14 +5,15 @@ class TreatmentsController < ApplicationController
     if params[:patient_id]
       if params[:patient_id].eql?(current_patient.id.to_s)
         @patientactions=true
+        @poly=true
+        @treatments=Treatment.order('created_at DESC').patient_treatments(params[:patient_id]).paginate(:page => params[:page], :per_page => 15)
       end
-      @treatments = Treatment.all
     elsif params[:encounter_id]
-      @treatments = Encounter.find(params[:encounter_id]).treatments
+      @treatments = Encounter.find(params[:encounter_id]).treatments.order('created_at DESC').paginate(:page => params[:page], :per_page => 15)
       load_encounter_actions #to set the encounter actions
+    else
+      @treatments = Treatment.paginate(:page => params[:page], :per_page => 15).all
     end
-
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @treatments }

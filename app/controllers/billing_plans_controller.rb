@@ -2,8 +2,12 @@ class BillingPlansController < ApplicationController
   # GET /billing_plans
   # GET /billing_plans.xml
   def index
-    @billing_plans = BillingPlan.all
-
+    if params[:bid]
+      @claims=BillingPlan.load_claims(params[:bid]).paginate(:page => params[:page], :per_page => 15)
+      current_plan
+    else
+      @billing_plans = BillingPlan.paginate(:page => params[:page], :per_page => 15).all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @billing_plans }
@@ -14,7 +18,13 @@ class BillingPlansController < ApplicationController
   # GET /billing_plans/1.xml
   def show
     @billing_plan = BillingPlan.find(params[:id])
-
+    if @billing_plan
+      session[:plan]=@billing_plan
+      current_plan
+      @claims=BillingPlan.load_claims(@current_plan.id.to_i)
+      @setts = Settlement.find_detailed_set(@current_plan)
+      Rails.logger.debug{@setts.inspect}
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @billing_plan }

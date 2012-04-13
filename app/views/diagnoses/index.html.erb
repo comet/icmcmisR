@@ -6,16 +6,18 @@
 <% @diagnoses.each do |diagnosis| %>
   <tr>
 <%if @poly %>
-    <%diagnosis.diagnoses.each do |single_diagnosis|%>
-      <td><%= link_to single_diagnosis.detail,single_diagnosis %></td>
+    <td><ol>
+      <%diagnosis.diagnoses.each do |single_diagnosis|%>
+      <li><%= link_to single_diagnosis.detail,single_diagnosis %></li>
     <%end%>
-
+      </ul></td>
   <%else%>
     <td><%=  link_to diagnosis.detail,diagnosis%></td>
     </tr>
   <%end%>
 <% end %>
 </table>
+<%=will_paginate(@diagnosis)%>
 <%end%>
 <%if @current_encounter%>
 <%= link_to 'New Diagnosis', new_encounter_diagnosis_path(@current_encounter),:class=>"button" %>

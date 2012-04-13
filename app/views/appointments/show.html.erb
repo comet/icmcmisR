@@ -1,2 +1,24 @@
-<h1>Appointments#show</h1>
-<p>Find me in app/views/appointments/show.html.erb</p>
+<div id="records">
+<p>
+  <b>Patient:</b>
+  <%= @appointment.patient_id %>
+</p>
+
+<p>
+  <b>App date:</b>
+  <%= @appointment.app_date %>
+</p>
+
+<p>
+  <b>Physician:</b>
+  <%= @appointment.physician_id %>
+</p>
+<p>
+  <b>Subject matter:</b>
+  <%= @appointment.subject_matter %>
+</p>
+<div>
+<%= link_to 'Edit', edit_appointment_path(@appointment),:class=>"button" %>
+<%= link_to 'Back', appointments_path,:class=>"button" %>
+</div>
+</div>
