@@ -1,0 +1,39 @@
+<%= form_for(@stockretake) do |f| %>
+  <fieldset>
+    <legend>New patient</legend>
+    <table>
+      <% if @stockretake.errors.any? %>
+        <tr id="error_explanation">
+          <td><%= pluralize(@stockretake.errors.count, "error") %> prohibited this stockretake from being saved:
+
+            <ul>
+              <% @stockretake.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+        <tr><td><%= f.hidden_field :payable_id,:value=>@drug.id.to_i %></td>
+        <td><%= f.hidden_field :updated_by ,:value=>@current_user.id.to_i%></td>
+        <td><%= f.hidden_field :quantity_at_update,:value=>@drug.quantity.to_i %></td></tr>
+      <tr class="field">
+        <td><%= f.label :item %></td>
+        <td><%= f.label @drug.name %></td>
+
+      </tr>
+      <tr class="field">
+        <td><%= f.label :quantity_at_update %></td>
+        <td><%= f.label @drug.quantity.to_i %></td>
+      </tr>
+      <tr class="field">
+        <td><%= f.label :added_quantity %></td>
+        <td><%= f.text_field :added_quantity %></td>
+      </tr>
+      <tr class="actions">
+        <td><%= f.submit %></td>
+        <td><%= link_to 'Back', stockretakes_path,:class=>"button" %></td>
+      </tr>
+    <% end %>
+  </table>
+</fieldset>

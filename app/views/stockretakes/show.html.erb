@@ -1,0 +1,27 @@
+<div id="records">
+<p>
+  <b>Item:</b>
+  <%= @stockretake.first.name %>
+</p>
+
+<p>
+  <b>Quantity at update:</b>
+  <%= @stockretake.first.quantity_at_update %>
+</p>
+
+<p>
+  <b>Quantity updated:</b>
+  <%= @stockretake.first.added_quantity %>
+</p>
+
+<p>
+  <b>Updated by:</b>
+  <%= @stockretake.first.username %>
+</p>
+<p>
+  <b>Updated at:</b>
+  <%= @stockretake.first.created_at.to_date %>
+</p>
+<%= link_to 'Edit', edit_stockretake_path(@stockretake),:class=>"button" %>
+<%= link_to 'Back', drugs_path,:class=>"button" %>
+</div>

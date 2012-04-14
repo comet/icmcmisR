@@ -15,10 +15,6 @@
     </td>
     </tr>
   <% end %>
-    <tr>
-    <td><%= f.label :encounter_type %></td>
-    <td><%= f.select(:encounter_type, options_for_select([['Initial Visit', 'Initial Visit'], ['Re-visit', 'Re-visit']])) %></td>
-  </tr>
   <tr class="field">
     <td><%= f.label :complains %></td>
     <td><%= f.text_area :complains %></td>

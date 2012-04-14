@@ -1,0 +1,19 @@
+<div class="item">
+  <div class="particulars_left">
+    <%=particular[:name]%>
+  </div>
+  <div class ="particulars_center">
+    <%if particular[:quantity].nil?%>
+      <b><%=1%></b><span> * <%=particular[:price]%>
+      <%else%>
+        <%=particular[:quantity]%><span> * <%=particular[:price]%>
+        <%end%>
+        </div>
+        <div class="particulars_right">
+          <%if particular[:quantity].eql?(0)%>
+            <%=particular[:price] * 1%><span class="error">(Assumed Quantity is 1)</span>
+          <%else%>
+            <%=particular[:price] * particular[:quantity]%>
+          <%end%>
+        </div>
+        </div>

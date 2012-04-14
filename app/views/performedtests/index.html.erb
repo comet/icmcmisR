@@ -1,4 +1,7 @@
 <%if @performedtests.size>0 %>
+  <%if @current_encounter%>
+<%= render :partial=>'test',:collection=>@performedtests,:as=>:performedtest,:spacer=>'' %>
+<%else%>
 <table class="data">
   <tr>
     <th>Name</th>
@@ -8,13 +11,14 @@
 
 <% @performedtests.each do |performedtest| %>
   <tr>
-    <td><%= performedtest.name %></td>
+    <td><%= link_to performedtest.name,edit_performedtest_path(performedtest) %></td>
     <td><%= performedtest.description %></td>
     <td><%= performedtest.price %></td>
   </tr>
 <% end %>
 </table>
 <%=will_paginate(@performedtests)%>
+<%end%>
 <%else%>
 <div class="norecords">No records yet</div>
 <%end%>

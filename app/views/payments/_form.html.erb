@@ -4,6 +4,8 @@
     <tr>
       <% if @particulars %>
         <%= render :partial => "particular", :collection => @particulars, :as => :particular, :spacer_template => "spacer"%>
+      <%elsif @particulars_special%>
+        <%= render :partial => "particular_special", :collection => @particulars_special, :as => :particular, :spacer_template => "spacer"%>
       <% else %>
         <td>No items yet</td>
       <% end %>
@@ -24,8 +26,8 @@
           </td>
         </tr>
       <% end %>
-      <%if @current_encounter%>
-        <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.to_i %></td>
+      <%if @encounter%>
+        <td><%= f.hidden_field :encounter_id,:value=>@encounter.to_i %></td>
       <%else%>
 
       <%end%>
@@ -34,9 +36,9 @@
       </tr>
       <tr>
         <td><%= f.label :expected_amount %></td>
-        <%if @current_encounter%>
-          <td><%= f.label calculate_expected(@current_encounter.to_i)%></td>
-          <td><%= f.hidden_field :expeccted_amount,:value=> calculate_expected(@current_encounter.to_i)%></td>
+        <%if @encounter && @particulars_special%>
+          <td><%= f.label calculate_expected_encounter(@particulars_special)%></td>
+          <td><%= f.hidden_field :expeccted_amount,:value=> calculate_expected_encounter(@particulars_special)%></td>
         <%elsif @particulars%>
           <td><%= f.label calculate_expected_set(@particulars)%></td>
           <td><%= f.hidden_field :expeccted_amount,:value=> calculate_expected_set(@particulars)%></td>
@@ -54,12 +56,13 @@
       </tr>
       <tr>
         <td><%= f.submit %></td>
-        <%if @current_encounter%>
+        <%if @encounter%>
           <td><%= link_to 'Back', encounter_payments_path,:class=>"button" %></td>
         <%else%>
           <td><%= link_to 'Back', payments_path,:class=>"button" %></td>
         <%end%>
+        <td><%= link_to 'Custom payment form', new_payment_path,:class=>"button" %></td>
       </tr>
     <% end %>
-    </table>
-      </fieldset>
+  </table>
+</fieldset>

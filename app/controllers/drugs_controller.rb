@@ -3,7 +3,7 @@ class DrugsController < ApplicationController
   # GET /drugs
   # GET /drugs.xml
   def index
-    @drugs = Drug.all
+    @drugs = Payable.all
 
     respond_to do |format|
       format.html # index.html.erb

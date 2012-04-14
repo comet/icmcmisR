@@ -3,12 +3,28 @@ class Encounter < ActiveRecord::Base
   has_many :treatments
   has_many :performedtests
   has_many :diagnoses
+  before_validation :ensure_type
+  validates :complains,:patient_id,:encounter_type,:presence=>true
+  def ensure_type
+
+    if patient_id
+      encounter = Encounter.find_all_by_patient_id(patient_id)
+
+    else
+      errors.add("Patient has to be chosen for an encounter")
+    end
+    if encounter && encounter.size >0
+      self.encounter_type="Re-visit"
+    else
+      self.encounter_type="Intial Visit"
+    end
+  end
   def self.day_visit_report(daily=false)
     if daily
       time_range = (Time.zone.now.midnight)..(Time.zone.now.midnight+1.day)
-      return Encounter.includes(:diagnoses,:treatments,:tests).where('created_at'=>time_range).all
+      return Encounter.includes(:diagnoses,:treatments,:tests).order('created_at DESC').where('created_at'=>time_range).all
     else
-      return Encounter.includes(:diagnoses,:treatments,:tests).all
+      return Encounter.includes(:diagnoses,:treatments,:tests).order('created_at DESC').all
     end
   end
   def self.handle_report(query_values)

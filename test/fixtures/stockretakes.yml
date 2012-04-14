@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  payable_id: 1
+  quantity_at_update: 1
+  added_quantity: 1
+  updated_by: 1
+
+two:
+  payable_id: 1
+  quantity_at_update: 1
+  added_quantity: 1
+  updated_by: 1

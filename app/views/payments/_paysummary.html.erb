@@ -1,8 +1,30 @@
-<tr>
-  <td><%=particular.name%></td>
-  <td >
-    <%=particular.quantity%></td>
-  <td> <%=particular.price%></td>
-  <td >
-    <b><%=particular.price * particular.quantity%></b></td>
-</tr>
+<%if !particular.name.nil?%>
+  <tr>
+    <%if !particular.name.nil?%>
+      <td><%=particular.name%></td>
+    <%else%>
+      <td><%= "" %></td>
+    <%end%>
+    <%if !particular.quantity.nil?%>
+      <td><%=particular.quantity%></td>
+    <%else%>
+      <td><%= 0 %></td>
+    <%end%>
+    <% if !particular.price.nil?%>
+      <td> <%=particular.price%></td>
+    <%else%>
+      <td><%= 0 %></td>
+    <%end%>
+    <%if particular.price.nil? && particular.quantity.nil?%>
+      <td><b><%=0 * 0%></b></td>
+    <%elsif particular.price.nil? && !particular.quantity.nil?%>
+      <td ><b><%= 0 *particular.quantity%></b></td>
+    <%elsif !particular.price.nil? && particular.quantity.nil?%>
+      <td ><b><%=particular.price * 0%></b></td>
+      <%else%>
+      <td ><b><%=particular.price * particular.quantity%></b></td>
+    <%end%>
+  </tr>
+<%else%>
+  <tr>No particulars for this payment</tr>
+<%end%>

@@ -16,7 +16,7 @@ class PerformedtestsController < ApplicationController
       #@performedtests = Encounter.find(params[:encounter_id]).performedtests
       load_encounter_actions #to set the encounter actions
     else
-      @performedtests = Performedtest.order('created_at DESC').joins("INNER JOIN tests on performedtests.test_id=tests.id").all.paginate(:page => params[:page], :per_page => 15)
+      @performedtests = Performedtest.order('created_at DESC').patient_tests.paginate(:page => params[:page], :per_page => 15)
     end
 
     respond_to do |format|
@@ -36,7 +36,6 @@ class PerformedtestsController < ApplicationController
       @performedtest = Performedtest.patient_tests(query_string)#Performedtest.find(params[:id])
     end
     load_encounter_actions #to set the encounter actions
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @performedtest }
@@ -102,7 +101,7 @@ class PerformedtestsController < ApplicationController
     respond_to do |format|
       #if @performedtest.save
       session[:tests]=@ptest
-      format.html { redirect_to(@performedtest, :notice => 'Performedtest was successfully created.') }
+      format.html { redirect_to(@performedtest, :notice => 'Performedtest was successfully created.To view all patient tests click the tests tab once more') }
       format.xml  { render :xml => @performedtest, :status => :created, :location => @performedtest }
       format.js {render :layout => false}
       # else

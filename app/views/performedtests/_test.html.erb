@@ -3,27 +3,25 @@
   <b>Test:</b>
   <%=  performedtest.name %>
 </p>
-
 <p>
   <b>Description:</b>
   <%= performedtest.description %>
 </p>
-
 <p>
   <b>Price:</b>
   <%= performedtest.price %>
 </p>
 <p>
   <b>Results:</b>
-  <%if performedtest.results%>
-  <%= performedtest.results %>
+  <%if !performedtest.results.blank?%>
+  <b><%= performedtest.results %></b>
   <%else%>
-  .<b><%= link_to "No results",:controller=>"performedtests",:action=>"edit"%></b>
+  <b><%= link_to "Add results",edit_performedtest_path(performedtest.id),:class=>"button"%></b>
   <%end%>
 </p>
 <p>
   <b>Comments:</b>
-  <%if performedtest.comments%>
+  <%if !performedtest.comments.blank?%>
   <%= performedtest.comments %>
   <%else%>
   .<b>No comments</b>

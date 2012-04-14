@@ -50,14 +50,24 @@ class PaymentsController < ApplicationController
       @payment = session[:pay_load]
       session[:pay_load]=nil#clear session
     else
-    @payment = Payment.new
+      @payment = Payment.new
     end
     if !request.xhr?
       if params[:encounter_id]
         load_encounter_actions #to set the encounter actions
+        @encounter=params[:encounter_id]
+        @particulars_special = Particular.details_of_encounter(@encounter)
       end
       if params[:payload]
-        @particulars = Particular.details(session[:parts])
+        if session[:parts]
+          val=session[:parts]
+        else
+          val=[0]
+        end
+        @particulars = Particular.details(val)
+      elsif params[:payload2]
+        @encounter=params[:payload2]
+        @particulars_special = Particular.details_of_encounter(@encounter)
       end
     end
     respond_to do |format|
@@ -79,20 +89,27 @@ class PaymentsController < ApplicationController
     encounter=params[:payment][:encounter_id]
     respond_to do |format|
       if @payment.save
-        if Payment.bind_particulars(@payment.id, session[:parts])
-        #clear the parts from the variable
-        session[:parts]=nil
-        if encounter
-          format.html { redirect_to(encounter_payment_path(encounter,@payment), :notice => 'Payment was successfully Posted.') }
+        if session[:parts]
+          if Payment.bind_particulars(@payment.id, session[:parts])
+            #clear the parts from the variable
+            session[:parts]=nil
+            if encounter
+              load_encounter_actions
+              format.html { redirect_to(payment_path(@payment), :notice => 'Payment was successfully Posted.') }
+            else
+              format.html { redirect_to(@payment, :notice => 'Payment was successfully Posted.') }
+              format.xml  { render :xml => @payment, :status => :created, :location => @payment }
+            end
+          else
+            render :action => "new"
+          end
         else
+          load_encounter_actions
           format.html { redirect_to(@payment, :notice => 'Payment was successfully Posted.') }
-          format.xml  { render :xml => @payment, :status => :created, :location => @payment }
-        end
-        else
-          render :action => "new"
         end
       else
         format.html {
+          
           session[:pay_load]=@payment
           redirect_to :action => "new",:payload=>0
         }

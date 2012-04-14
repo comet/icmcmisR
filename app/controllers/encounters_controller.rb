@@ -32,11 +32,9 @@ class EncountersController < ApplicationController
     @encounter = Encounter.find(params[:id])
     if @encounter
       session[:encounter_id]=@encounter.id.to_i
-      #if params[:patient_id].eql?(current_patient.id.to_s)
+      Rails.logger.debug{"current encounter is"+@current_encounter.to_s}
       @patientactions=false #disable the patients actions partial
       ensure_encounter_actions
-      #@encounteractions=true encounter actions enabled
-      #end
     end
 
     respond_to do |format|
@@ -51,7 +49,7 @@ class EncountersController < ApplicationController
 
     if @current_patient.nil?
       current_patient
-      Rails.logger.debug{"Creating encounter for @current_patient"}
+      Rails.logger.debug{"form to create encounter for @current_patient"}
       Rails.logger.debug{@current_patient.id.to_s}
     end
     @encounter = Encounter.new
@@ -77,8 +75,8 @@ class EncountersController < ApplicationController
   # POST /encounters
   # POST /encounters.xml
   def create
+    current_patient #keeps the patient id on form in the event of an error
     @encounter = Encounter.new(params[:encounter])
-
     respond_to do |format|
       if @encounter.save
         format.html { redirect_to(@encounter, :notice => 'Encounter was successfully created.') }

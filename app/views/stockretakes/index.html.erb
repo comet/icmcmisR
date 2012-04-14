@@ -1,0 +1,23 @@
+<%if @stockretakes && @stockretakes.size>0%>
+<table class="data">
+  <tr>
+    <th>Item</th>
+    <th>Quantity before update</th>
+    <th>Updated Quantity</th>
+    <th>Updated by</th>
+    <th>Updated by</th>
+  </tr>
+
+<% @stockretakes.each do |stockretake| %>
+  <tr>
+    <td><%= link_to stockretake.name,stockretake %></td>
+    <td><%= stockretake.quantity_at_update %></td>
+    <td><%= stockretake.added_quantity %></td>
+    <td><%= stockretake.username %></td>
+    <td><%= stockretake.created_at.to_date %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<div id="norecords"><p>No records</p></div>
+<%end%>

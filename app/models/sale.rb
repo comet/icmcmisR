@@ -1,10 +1,15 @@
 class Sale < ActiveRecord::Base
-  def self.sold_items(hash=nil)
+  def self.sold_items(hash=nil,where=nil)
     if hash
       #Rails.logger.debug{"using hash"}
-      Sale.find_by_sql("SELECT * FROM `sales` INNER JOIN drugs on sales.item_id=drugs.id INNER JOIN people on sales.sold_by=people.id WHERE (`sales`.#{hash[:query_column]} = #{hash[:value]})")
-    end
-    Sale.find_by_sql("SELECT * FROM `sales` INNER JOIN drugs on sales.item_id=drugs.id INNER JOIN people on sales.sold_by=people.id")
-    #Rails.logger.debug{"using "}
+      self.find_by_sql("SELECT * FROM `particulars` INNER JOIN payables on particulars.payable_id=payables.id WHERE (`sales`.#{hash[:query_column]} = #{hash[:value]}) ORDER BY particulars.created_at DESC")
+    else
+      if where.eql?("sales")
+      self.find_by_sql("SELECT * FROM `particulars` INNER JOIN payables on particulars.payable_id=payables.id where payables.type='Drug' ORDER BY particulars.created_at DESC")
+      else
+
+    self.find_by_sql("SELECT * FROM `particulars` INNER JOIN payables on particulars.payable_id=payables.id ORDER BY particulars.created_at DESC")
+      end
+      end
   end
 end

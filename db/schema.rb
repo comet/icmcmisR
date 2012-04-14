@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413034530) do
+ActiveRecord::Schema.define(:version => 20120414025115) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "patient_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20120413034530) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   create_table "payments", :force => true do |t|
@@ -214,6 +215,15 @@ ActiveRecord::Schema.define(:version => 20120413034530) do
   end
 
   create_table "specifics", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stockretakes", :force => true do |t|
+    t.integer  "payable_id"
+    t.integer  "quantity_at_update"
+    t.integer  "added_quantity"
+    t.integer  "updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

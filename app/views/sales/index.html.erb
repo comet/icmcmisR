@@ -1,18 +1,25 @@
-<%if @sales.size>0 %>
+<%if @sales && @sales.size>0 %>
 <table class="data">
   <tr>
     <th>Item</th>
     <th>Price</th>
-    <th>Sold by</th>
+    <th>Sold on</th>
+    <th>Time</th>
   </tr>
 
 <% @sales.each do |sale| %>
+  <%unless sale.type.eql?("Test")%>
   <tr>
     <td><%= sale.name %></td>
     <td><%= sale.price %></td>
-    <td><%= sale.surname.nil?? " ": sale.surname.concat( sale.first_name.nil?? " " : sale.first_name) %></td>
+    <td><%= sale.created_at.to_date%></td>
+    <td><%= time_ago(sale.created_at.to_time)%></td>
   </tr>
+  <%end%>
 <% end %>
 </table>
+<%=will_paginate(@sales)%>
+<%else%>
+<div class="norecords">No records</div>
 <%end%>
-<%= link_to 'New Sale', new_sale_path,:class=>"button" %>
+<%= link_to 'New Sale', new_payment_path,:class=>"button" %>

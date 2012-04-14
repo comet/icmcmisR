@@ -18,21 +18,24 @@
       <% end %>
       <tr>
         <td><%=f.label :results%></td>
-        <td><%= f.select(:results, options_for_select([['Negative', 'negative'],['Positive', 'negative']])) %></td>
+        <td><%= f.select(:results, options_for_select([['Negative', 'negative'],['Positive', 'positive']])) %></td>
       </tr>
       <tr>
         <td><%=f.label :comments%></td>
         <td><%= f.text_area :comments%></td>
       </tr>
       <tr>
-        <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.id.to_i %></td>
-      </tr>
-      <tr>
-        <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_i %></td>
+        <%if @performedtest.encounter_id%>
+          <td><%= f.hidden_field :patient_id,:value=>@performedtest.patient_id.to_i %></td>
+          <td><%= f.hidden_field :encounter_id,:value=>@performedtest.encounter_id.to_i %></td>
+        <%else%>
+          <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.id.to_i %></td>
+          <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_i %></td>
+        <%end%>
       </tr>
       <tr>
         <td><%= f.submit "Update Test results" %></td>
-        <td><%= link_to 'Back', performedtests_path,:class=>"button" %></td>
+        <td><%= link_to 'Back', encounter_performedtests_path(@performedtest.encounter_id),:class=>"button" %></td>
       </tr>
     <% end %>
   </table>

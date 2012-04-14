@@ -6,7 +6,7 @@ class SalesController < ApplicationController
     if params[:id]
       #create a hash
     else
-      @sales = Sale.sold_items
+      @sales = Sale.sold_items(nil,"sales").paginate(:page => params[:page], :per_page => 15)
     end
     respond_to do |format|
       format.html # index.html.erb

@@ -1,5 +1,7 @@
 Icmcmis::Application.routes.draw do
 
+  resources :stockretakes
+
   resources :appointments
 
   resources :claim_particulars

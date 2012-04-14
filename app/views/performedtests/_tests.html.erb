@@ -1,6 +1,6 @@
-<tr>
-  <%  Test.all.each do |value|%>
-  <td><%=value.name%> </td>
-  <td><%= check_box_tag value.id %></td>
-  <%end%>
-</tr>
+<%  Test.all.each do |value|%>
+  <tr>
+    <td><%=value.name%> </td>
+    <td><%= check_box_tag value.id %></td>
+  </tr>
+<%end%>
