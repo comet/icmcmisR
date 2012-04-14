@@ -4,5 +4,9 @@
   <%= @treatment.detail %>
 </p>
 </div>
-<%= link_to 'Edit', edit_treatment_path(@treatment),:class=>"button" %> |
+<%= link_to 'Edit', edit_treatment_path(@treatment),:class=>"button" %>
+<%if @current_encounter%>
 <%= link_to 'Back', encounter_treatments_path(@current_encounter),:class=>"button" %>
+<%else%>
+<%= link_to 'Back', treatments_path,:class=>"button" %>
+<%end%>
