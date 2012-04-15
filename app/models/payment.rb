@@ -14,8 +14,32 @@ class Payment < ActiveRecord::Base
           false
         end
       end
+      self.update_quantity(partics)
     else
       true
+    end
+  end
+  def self.update_quantity(partics)
+    if partics
+      partics.each do|p|
+        @p=Particular.find(p)
+        change = @p.quantity
+        @item = Payable.find(@p.payable_id)
+        if @item && @item.quantity
+          g=@item.quantity - change
+          if g <0
+            g=0
+          else
+            @item.quantity=g
+          end
+        end
+        if @item.save
+          true
+        else
+          Rails.logger.debug{"Failed deducting quality"}
+          true
+        end
+      end
     end
   end
   def self.payments_specific(hash)

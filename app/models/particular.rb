@@ -1,10 +1,10 @@
 class Particular < ActiveRecord::Base
   belongs_to :payment
   def self.details(parts)
-    if parts.size>0
+    if parts && parts.size>0
       #val =self.where(:id=>parts).joins("LEFT OUTER JOIN payables ON particulars.payable_id = payables.id")
       parts=process(parts)
-      Particular.find_by_sql("SELECT * FROM `particulars` INNER JOIN payables ON particulars.payable_id = payables.id WHERE (`particulars`.`id` IN ( #{parts}))")
+      Particular.find_by_sql("SELECT particulars.*,payables.name,payables.price,payables.quantity as stock FROM `particulars` INNER JOIN payables ON particulars.payable_id = payables.id WHERE (`particulars`.`id` IN ( #{parts}))")
     end
 
   end

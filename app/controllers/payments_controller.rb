@@ -64,6 +64,7 @@ class PaymentsController < ApplicationController
         else
           val=[0]
         end
+        Rails.logger.debug{val.inspect}
         @particulars = Particular.details(val)
       elsif params[:payload2]
         @encounter=params[:payload2]
@@ -109,7 +110,6 @@ class PaymentsController < ApplicationController
         end
       else
         format.html {
-          
           session[:pay_load]=@payment
           redirect_to :action => "new",:payload=>0
         }

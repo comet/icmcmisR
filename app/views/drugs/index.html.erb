@@ -3,6 +3,7 @@
   <tr>
     <th>Name</th>
     <th>Price</th>
+    <th>Current Stock</th>
     <th></th>
   </tr>
 
@@ -11,7 +12,7 @@
   <tr>
     <td><%= link_to drug.name,drug %></td>
     <td><%= drug.price %></td>
-
+    <td><%= drug.quantity %></td>
     <td><%= link_to "Stock Update",new_stockretake_path("stid"=>drug.id) %></td>
   </tr>
   <%end%>

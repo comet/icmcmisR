@@ -67,6 +67,7 @@ class StockretakesController < ApplicationController
 
     respond_to do |format|
       if @stockretake.save
+        @stockretake.update_item
         format.html { redirect_to(@stockretake, :notice => 'Stock was successfully updated.') }
         format.xml  { render :xml => @stockretake, :status => :created, :location => @stockretake }
       else
