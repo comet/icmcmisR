@@ -101,7 +101,7 @@ class PerformedtestsController < ApplicationController
     respond_to do |format|
       #if @performedtest.save
       session[:tests]=@ptest
-      format.html { redirect_to(@performedtest, :notice => 'Performedtest was successfully created.To view all patient tests click the tests tab once more') }
+      format.html { redirect_to(@performedtest, :notice => 'Performedtest was successfully created.To view all patient tests click the tests tab') }
       format.xml  { render :xml => @performedtest, :status => :created, :location => @performedtest }
       format.js {render :layout => false}
       # else

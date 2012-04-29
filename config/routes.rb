@@ -50,6 +50,8 @@ Icmcmis::Application.routes.draw do
   get "sessions/request_new"
 
   get "sessions/password"
+  get "patients/quick_labs"
+  post "patients/quick_labs"
   resources :payments do
     resources :particulars
   end

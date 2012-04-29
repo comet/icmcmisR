@@ -1,22 +1,7 @@
-<%= link_to 'New Encounter', new_encounter_path,:class=>"button" %>
 <%if @encounters &&@encounters.size>0 %>
-<table class="data">
-  <tr>
-    <th>Time</th>
-    <th>Complains</th>
-    <th>Remarks</th>
-    <th>Type</th>
-  </tr>
-<% @encounters.each do |encounter| %>
-  <tr class="<%= cycle("odd", "even")%>">
-    <td><%=time_ago(encounter.created_at)%></td>
-    <td><%= link_to encounter.complains,encounter %></td>
-    <td><%= encounter.remarks %></td>
-    <td><%= encounter.encounter_type %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => "detailed_encounter", :collection => @encounters, :as => :encounter,:spacer_template=>"encounters/spacer"%>
 <%=will_paginate(@encounters)%>
 <%else%>
 <div class="norecords"><p>No records</p></div>
 <%end%>
+<%= link_to 'New Encounter', new_encounter_path,:class=>"button" %>

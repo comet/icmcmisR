@@ -1,10 +1,14 @@
 module BillingPlansHelper
-  def get_tab_class(tab_name)
-    if params[:controller].eql?(tab_name)
-      "selected"
-    elsif tab_name.eql?("claims")
-      "selected"
+  def get_bills_tab_class(tab_name)
+    classs="unselected"
+    if params[:controller].eql?("billing_plans") && "overview".eql?(tab_name) &&params[:id]
+      classs="selected"
+    elsif tab_name.eql?("claims") && params[:bid]
+      classs="selected"
+    elsif tab_name.eql?("settlements") && params[:controller].eql?("settlements")
+        classs="selected"
     end
+    return classs
   end
   def calculate_bp_summary(val_array_a,val_array_b,side)
     side_a=0

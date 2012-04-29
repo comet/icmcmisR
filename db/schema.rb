@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120414025115) do
+ActiveRecord::Schema.define(:version => 20120428195647) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "patient_id"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20120414025115) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quantity"
+    t.float    "quantity"
     t.string   "type"
     t.string   "given_by"
   end
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20120414025115) do
     t.integer  "encounter_id"
     t.string   "type"
     t.string   "received_from"
+    t.integer  "debt",             :default => 0
   end
 
   create_table "people", :force => true do |t|

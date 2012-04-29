@@ -11,7 +11,9 @@ gem 'declarative_authorization'
 gem 'will_paginate'
 #gem 'jquery-rails','< 3.0.0'
 gem  'jquery_datepicker'
-
+gem 'ruport'
+gem 'ruport-util'
+gem 'acts_as_reportable'
 # Use unicorn as the web server
 # gem 'unicorn'
 

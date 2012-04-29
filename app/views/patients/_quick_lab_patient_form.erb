@@ -1,0 +1,27 @@
+      <tr>
+        <!--<div class="field">-->
+        <td><%= label_tag :names %></td>
+        <td><%= text_field_tag 'names',nil,:placeholder => 'Enter three names...(surname first)',:size => 50 %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag :gender %></td>
+        <td><%= select(:gender, "gender",options_for_select([['Male', 'male'], ['Female', 'female']])) %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= label_tag :address %></td>
+        <td><%= text_field_tag :address %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= label_tag :phone_number %></td>
+        <td><%= text_field_tag :phone_number %></td>
+      </tr>
+      <tr>
+        <td><%= label_tag :Or_Age %></td>
+        <td><%= text_field_tag :birth_date_estimate %></td>
+      </tr>
+      <!--<div class="field">-->
+      <tr>
+        <td><%= hidden_field_tag :alive,1 %></td>
+      </tr>

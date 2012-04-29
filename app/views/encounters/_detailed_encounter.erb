@@ -1,0 +1,73 @@
+<% if encounter%>
+<div class="records">
+  <fieldset><strong>Date of visit:</strong> <%=  encounter.created_at.to_date%></fieldset>
+  <div>
+    <table class="data">
+      <thead>
+      <td><b>Complains<b></td>
+            </thead>
+            <tr>
+              <%if encounter.complains%>
+                <td><%= link_to encounter.complains,encounter %></td>
+              <%else%>
+                <td>undefined</td>
+              <%end%>
+            </tr>
+            </table>
+            </div>
+            <div>
+              <table class="data">
+                <thead>
+                <td><b>Diagnoses<b></td>
+                      </thead>
+                      <%if encounter.diagnoses.size>0%>
+                        <tr>
+                          <td><ul><%encounter.diagnoses.each do |diagnosis|%>
+                                <li><%= diagnosis.detail %></li>
+                              <%end%></ul></td>
+                        <%else%>
+                          <td>No diagnosis</td>
+                        <%end%>
+                      </tr>
+                      </table>
+                      </div>
+                      <div>
+                        <table class="data">
+                          <thead>
+                          <td><b>Tests<b></td>
+                                </thead>
+                                <tr>
+                                  <%if encounter.performedtests.size>0%>
+                                    <td><ul><%encounter.performedtests.each do |ptest|%>
+                                        <%begin%>
+                                          <li><%= Test.find(ptest.test_id).name.nil? ?  "No name" : Test.find(ptest.test_id).name  %></li>
+                                          <%rescue=>exception%>
+                                          <li><%=   "No name"  %></li>
+                                          <%end%>
+                                        <%end%></ul></td>
+                                  <%else%>
+                                    <td>No tests</td>
+                                  <%end%>
+                                </tr>
+                                </table>
+                                </div>
+                                <div>
+                                  <table class="data">
+                                    <thead>
+                                    <td><b>Treatments<b></td>
+                                          </thead>
+                                          <tr>
+                                            <%if encounter.treatments.size>0%>
+                                              <td><ul><%encounter.treatments.each do |treatment|%>
+                                                    <li><%= treatment.detail %></li>
+                                                  <%end%></ul></td>
+                                            <%else%>
+                                              <td>No treatments</td>
+                                            <%end%>
+                                          </tr>
+                                          </table>
+                                          </div>
+                                          </div>
+<%else%>
+<div><p class="error">Undefined request. Please use the correct procedure.</p></div>
+<%end%>

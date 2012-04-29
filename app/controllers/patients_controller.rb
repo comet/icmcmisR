@@ -2,7 +2,91 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.xml
   before_filter :load_patient_actions,:only=>'show'
+  def quick_labs
+    @performedtest = Performedtest.new({})
 
+    if request.post?
+      #process both entities presented
+      begin
+        @performedtest.save
+      rescue exception
+        #do nothing
+      end
+      @patient=nil
+      patient={}
+      tests={}
+      names=params[:names]
+      if names
+        surname,fname,sname =names.split(" ")
+        patient={:first_name=>fname,
+          :given_name=>sname,
+          :surname=>surname,
+          :address=>params[:address],
+          :gender=>params[:gender][:gender],
+          :phone_number=>params[:phone_number],
+          :birth_date_estimate=>params[:birth_date_estimate],
+          :created_by=>params[:created_by],
+          :alive=>params[:alive]
+        }
+
+      end
+      @patient= Patient.new(patient)
+      if @patient.save
+        #create an encounter
+        encounter={:encounter_type=>"tests",
+          :complains=>"tests only",
+          :remarks=>"tests",
+          :patient_id=>@patient.id
+        }
+        @encounter = Encounter.new(encounter)
+        if @encounter.save
+          @tests=[]
+          @ptest=[]
+          Rails.logger.debug{"Successfully created encounter"}
+          params.each do |test|
+            #load selected tests
+            testa=test.to_a
+            #Rails.logger.debug{testa.inspect}
+            @tests << testa[0] if testa[1].eql?("1") && !testa[0].eql?("alive")
+          end
+          ptest_hash={:patient_id=>@encounter.patient_id,
+            :encounter_id=>@encounter.id
+          }
+          @tests.each do |test|
+            @performedtest = Performedtest.new(ptest_hash)
+            @performedtest.test_id=test.to_i
+            if @performedtest.save
+              Rails.logger.error{"Successfully created the test "+test.to_s}
+              @ptest<<@performedtest.id
+            else
+              #Do nothing
+              Rails.logger.error{"Could not save the test "+test.to_s}
+            end
+          end
+          #load this new encounter into session
+          session[:tests]=@ptest
+          session[:encounter_id]=@encounter.id.to_i
+          session[:patient]=@patient
+          current_patient
+          current_encounter
+          #redirect to performedtests page
+          redirect_to(@performedtest, :notice => 'Performedtest was successfully created.To view all patient tests click the tests tab')
+        end
+      else
+        Rails.logger.debug{@patient.errors.inspect}
+        if @performedtest.errors.nil?
+          @performedtest.errors={}
+          @performedtest.errors=@performedtest.errors.clone.update(@patient.errors)
+        end
+        Rails.logger.debug{@performedtest.errors.inspect}
+
+        render :action=>'quick_labs'
+      end
+
+    else
+
+    end
+  end
   def index
     @patients = Patient.all
     respond_to do |format|

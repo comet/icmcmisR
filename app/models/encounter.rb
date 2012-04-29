@@ -15,6 +15,8 @@ class Encounter < ActiveRecord::Base
     end
     if encounter && encounter.size >0
       self.encounter_type="Re-visit"
+    elsif self.encounter_type.eql?("tests")
+      self.encounter_type="tests_only"
     else
       self.encounter_type="Intial Visit"
     end

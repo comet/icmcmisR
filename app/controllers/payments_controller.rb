@@ -86,6 +86,9 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.xml
   def create
+    if params[:debt] && params[:debt].eql?('1')
+    debt=true
+    end
     @payment = Payment.new(params[:payment])
     encounter=params[:payment][:encounter_id]
     respond_to do |format|
@@ -96,6 +99,9 @@ class PaymentsController < ApplicationController
             session[:parts]=nil
             if encounter
               load_encounter_actions
+              if debt
+                format.html { redirect_to(payment_path(@payment), :notice => 'Debt was successfully Posted.') }
+              end
               format.html { redirect_to(payment_path(@payment), :notice => 'Payment was successfully Posted.') }
             else
               format.html { redirect_to(@payment, :notice => 'Payment was successfully Posted.') }

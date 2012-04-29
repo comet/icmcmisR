@@ -1,0 +1,22 @@
+<%= form_tag("/patients/quick_labs") do |f| %>
+  <% if @performedtest.errors.any? %>
+
+      <tr>
+      <td><%= pluralize(@performedtest.errors.count, "error") %> prohibited this performedtest from being saved:
+
+      <ul>
+      <% @performedtest.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+    <%=render :partial=>"quick_lab_patient_form"%>
+    <%=render :partial=>'tests'%>
+  <tr>
+    <td><%= hidden_field_tag :created_by,@current_user.id.to_i %></td>
+    <td><%= submit_tag "Submit Test" %></td>
+    <td><%= link_to 'Back', new_patient_path,:class=>"button" %></td>
+  </tr>
+<% end %>

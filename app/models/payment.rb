@@ -55,7 +55,13 @@ class Payment < ActiveRecord::Base
   def amount_is_enough
     if payment_method.eql?("CASH")
       if amount && amount < expeccted_amount
-        errors.add(:amount,"cannot be less than amount due")
+        Rails.logger.debug("amount of debt is "+debt.to_s)
+        if debt && debt.eql?(1)
+          self.debt=(expeccted_amount-amount)
+          return true
+        else
+          errors.add(:amount,"cannot be less than amount due")
+        end
       end
     end
 

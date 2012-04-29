@@ -281,6 +281,12 @@ a:hover { color: #3c9fd3; }
     padding:6px 10px;
     line-height: 2.2em;
 }
+.records{
+    background:#f2f2f2;
+    float: left;
+    width: 100%;
+    padding:6px 10px;
+}
 #loginform {
     width: 500px;
     padding: 20px;
@@ -424,19 +430,14 @@ a:hover { color: #3c9fd3; }
     padding: 5px 5px;
     overflow: hidden;
     width: 927px; }
+.spacer {
+  border-top: 1px solid #765d3a;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0;
+  height: 0;
+ }
 
-/*#error {
-  color: red;
-}
-.error {
-  color: red;
-}
-#warning {
-  color: yellow;
-}
-.warning {
-  color: yellow;
-}*/
 .field_with_errors {
   padding: 2px;
   background-color: red;
