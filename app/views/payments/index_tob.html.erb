@@ -1,0 +1,46 @@
+<%if @payments.size>0%>
+  <table class="data">
+    <tr>
+      <th>Amount</th>
+      <th>Received by</th>
+      <th>Expected amount</th>
+      <th>Payment method</th>
+    </tr>
+
+    <% @payments.each do |payment| %>
+      <tr>
+        <td>
+          <%if payment && payment.particulars.size>0 %>
+            <%= render :partial => "single_payment", :collection => payment.particulars, :as => :particular,:spacer_template=>"encounters/spacer"%>
+          <%else%>
+            <div class="norecords"><p>No particulars records</p></div>
+          </td>
+          <td><%= link_to payment.amount,payment_path(payment.payment_id) %></td>
+          <td><%= link_to payment.username,user_path(payment.user_id) %></td>
+          <td><%= payment.expeccted_amount %></td>
+          <td><%= payment.payment_method %></td>
+        </tr>
+      <% end %>
+    </table>
+  <%end%>
+  <%= will_paginate @payments %>
+  <%if @current_encounter%>
+    <%= link_to 'New Payment', new_encounter_payment_path,:class=>"button" %>
+  <%else%>
+    <%= link_to 'New Payment', new_payment_path,:class=>"button" %>
+  <%end%>
+<%else%>
+<div><p class="norecords">No records</p></div>
+<%end%>
+
+<!--<%#if @payments &&@payments.size>0 %>
+  <%#= render :partial => "single_payment", :collection => @payments, :as => :particular,:spacer_template=>"encounters/spacer"%>
+<%#=will_paginate(@payments)%>
+<%#else%>
+<div class="norecords"><p>No records</p></div>
+<%#end%>
+<%#if @current_encounter%>
+<%#= link_to 'New Payment', new_encounter_payment_path,:class=>"button" %>
+<%#else%>
+<%#= link_to 'New Payment', new_payment_path,:class=>"button" %>
+<%#end%>-->

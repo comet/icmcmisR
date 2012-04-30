@@ -48,6 +48,7 @@ class Payment < ActiveRecord::Base
   def self.find_detailed(id=nil)
     if id.nil?
       self.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,amount,username,expeccted_amount,payment_method FROM payments INNER JOIN people ON people.id=payments.received_by ORDER BY payments.created_at DESC" )
+      #self.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,name,amount,username,expeccted_amount,payment_method,particulars.quantity,payables.price,payables.quantity as stock_size FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by ORDER BY payments.created_at DESC")
     else
       self.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,name,amount,username,expeccted_amount,payment_method,particulars.quantity,payables.price,payables.quantity as stock_size FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by WHERE payments.id=#{id} ORDER BY payments.created_at" )
     end
@@ -67,9 +68,10 @@ class Payment < ActiveRecord::Base
 
   end
   def self.daily_report
-    time_range = (Time.zone.now).to_date
-    #time_to =(Time.zone.now.midnight+1.day).to_date
-    return Payment.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,name,amount,username,expeccted_amount,payment_method FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by WHERE payments.created_at >= #{time_range} " )
+    time_from = (Time.zone.now.midnight).to_time
+    time_to =(Time.zone.now.midnight+1.day).to_time
+    return self.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,amount,username,expeccted_amount,payment_method FROM payments INNER JOIN people ON people.id=payments.received_by WHERE payments.created_at >=' #{time_from}' AND payments.created_at <= '#{time_to}' ORDER BY payments.created_at DESC" )
+    #return Payment.find_by_sql("SELECT payments.id as payment_id,people.id as user_id,name,amount,username,expeccted_amount,payment_method FROM payments INNER JOIN particulars ON payments.id=particulars.payment_id INNER JOIN payables ON particulars.payable_id=payables.id INNER JOIN people ON people.id=payments.received_by WHERE payments.created_at >=' #{time_from}' AND payments.created_at <= '#{time_to}'" )
   end
   def self.handle_report(query_values)
     params = query_values || {} # Set params to empty hash if it's nil

@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   #belongs_to :personifiable, :polymorphic => true
+  acts_as_reportable
   has_many :patients
   has_one :user
   validates_numericality_of :phone_number

@@ -9,12 +9,15 @@
 
 <% @records.each do |payment| %>
   <tr>
-    <td><%= link_to payment.amount,'#' %></td>
-    
+    <td><%= link_to payment.amount,payment_path(payment.payment_id) %></td>
+    <td></td>
     <td><%= payment.expeccted_amount %></td>
     <td><%= payment.payment_method %></td>
   </tr>
 <% end %>
 </table>
-<%end%>
+<%= render :partial=>"payments/day_summary",:locals => { :payments => @records } %>
 <%= will_paginate @records %>
+<%else%>
+<div><p class="norecords">No records matched your query</p></div>
+<%end%>

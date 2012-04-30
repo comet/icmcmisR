@@ -18,7 +18,7 @@ Icmcmis::Application.routes.draw do
   get "search/search"
 
   get "search/results"
-
+  get "reports/report_view"
   get "reports/patients"
   get "reports/encounters"
   get "reports/diagnoses"

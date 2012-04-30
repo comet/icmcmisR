@@ -4,6 +4,7 @@ class Patient < Person
   has_many :appointments
   has_many :doctors, :through =>:appointments
   has_many :encounters
+
   def age_is_sensible
     if birth_date && birth_date_estimate.length>0
       errors.add(:birth_date_estimate,"cannot be filled if birthdate is known")

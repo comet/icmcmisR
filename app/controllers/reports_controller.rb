@@ -8,6 +8,16 @@ class ReportsController < ApplicationController
   def simple
 
   end
+  def report_view
+    @table = Encounter.report_table(:all,
+      :conditions => ["created_at >= #{Time.now.to_date}"],
+      :only => ["patient.first_name", "created_at"],
+      :include => { :patient => { :methods => ["first_name","surname"], :only => {}} } )
+    unless @table.empty?
+      @table.rename_column("patient.first_name", "Patient")
+      @table.rename_columns { |c| c.titleize }
+    end
+  end
   def patients
 
     if params[:query]

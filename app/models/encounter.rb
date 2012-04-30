@@ -5,6 +5,7 @@ class Encounter < ActiveRecord::Base
   has_many :diagnoses
   before_validation :ensure_type
   validates :complains,:patient_id,:encounter_type,:presence=>true
+  acts_as_reportable
   def ensure_type
 
     if patient_id

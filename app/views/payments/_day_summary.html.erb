@@ -1,0 +1,16 @@
+
+<table class="data">
+  <thead><td><b>Day summary:</b><td></thead>
+
+  <tr>
+    <th>Total expected</th>
+    <th>Total paid(cash)</th>
+    <th>Difference</th>
+  </tr>
+  <tr>
+    <%hash = compute_daily(@records)%>
+    <td><%=hash[:expected]%></td>
+    <td><%=hash[:paid]%></td>
+    <td><%=hash[:diff]%></td>
+  </tr>
+</table>
