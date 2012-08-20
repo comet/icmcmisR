@@ -24,4 +24,18 @@ module ApplicationHelper
 
     return time
   end
+  def full_names(patient)
+    name1=nil
+    names=nil
+    fullnames=nil
+    if patient
+    name1=patient.surname.concat(" ").concat(patient.first_name) unless patient.given_name.nil?
+    names =name1.concat(" ").concat(patient.given_name) unless patient.given_name.nil?
+    fullnames=names
+    patient=nil
+    return fullnames.to_s
+    else
+      "None defined"
+    end
+  end
 end

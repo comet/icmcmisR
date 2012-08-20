@@ -17,7 +17,7 @@
 <% end %>
 </table>
 <%= render :partial=>"payments/day_summary",:locals => { :payments => @records } %>
-<%= will_paginate @records %>
+<%#= will_paginate @records %>
 <%else%>
 <div><p class="norecords">No records matched your query</p></div>
 <%end%>

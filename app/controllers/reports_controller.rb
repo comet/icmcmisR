@@ -97,28 +97,30 @@ class ReportsController < ApplicationController
       if params[:model]
         handler = params[:model]
         if handler.eql?("valuepatient") #strange addition by the form to the param model
-          @records= Patient.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          #disable pagination because of a bug 
+          @records= Patient.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
           #Rails.logger.debug{@records.inspect}
         elsif handler.eql?("valueuser")
-          @records=User.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=User.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("valueencounter")
-          @records=Encounter.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Encounter.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("valuetreatment")
-          @records=Treatment.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Treatment.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("valuediagnosis")
-          @records=Diagnosis.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Diagnosis.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("valuepayment")
-          @records=Payment.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Payment.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("Test")
-          @records=Patient.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Patient.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("SpecialObservation")
-          @records=Patient.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Patient.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         elsif handler.eql?("Billing_plan")
-          @records=Patient.handle_report(params).paginate(:page => params[:page], :per_page => 15)
+          @records=Patient.handle_report(params)#.paginate(:page => params[:page], :per_page => 15)
         else
           #General Do nothing
           @records="blank"
         end
+                         
       end
     else
       if params[:model]
@@ -292,12 +294,12 @@ class ReportsController < ApplicationController
       end
     end
   end
-  def to_csv(array,name="csv")
+  def create_csv(array,name="csv")
     file_name = "#{name}_report.csv"
     file = File.open("#{Rails.root.to_s}/#{file_name}", "w") 
     #write array to csv file
     
-    file.print(@table)
+    file.print(array)
     file.close
     path = File.join(Rails.root.to_s, file_name)
     flash[:message]="File successfully downloaded"

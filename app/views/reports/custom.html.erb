@@ -2,6 +2,7 @@
   <%if @records.eql?("blank")%>
     <h1>No records found</h1>
   <%else%>
+    <%=render :partial=>'export_to_csv'%>
     <%=render :partial=>'report_details'%>
   <%end%>
 <%elsif @custom%>
