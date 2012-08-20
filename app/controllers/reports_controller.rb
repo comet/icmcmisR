@@ -93,7 +93,6 @@ class ReportsController < ApplicationController
   def custom
     @records=nil
     if request.post?
-      Rails.logger.debug{params.inspect}
       if params[:model]
         handler = params[:model]
         if handler.eql?("valuepatient") #strange addition by the form to the param model
@@ -298,7 +297,6 @@ class ReportsController < ApplicationController
     file_name = "#{name}_report.csv"
     file = File.open("#{Rails.root.to_s}/#{file_name}", "w") 
     #write array to csv file
-    
     file.print(array)
     file.close
     path = File.join(Rails.root.to_s, file_name)
