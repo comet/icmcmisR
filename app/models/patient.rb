@@ -50,7 +50,7 @@ class Patient < Person
 
     end
     if params[:age].length>0
-      conditions[0]+="AND birth_date = ?"
+      conditions[0]+="AND birth_date >= ?"
       conditions<< params[:age]
 
     end

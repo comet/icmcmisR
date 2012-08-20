@@ -62,7 +62,7 @@ class Encounter < ActiveRecord::Base
 
     end
     if params[:age]
-      conditions[0]+="AND birth_date = ?"
+      conditions[0]+="AND birth_date >= ?"
       conditions<< params[:age]
     end
     if params[:treatment].length>0 || params[:diagnosis].length>0
