@@ -32,7 +32,7 @@ class EncountersController < ApplicationController
     @encounter = Encounter.find(params[:id])
     if @encounter
       session[:encounter_id]=@encounter.id.to_i
-      Rails.logger.debug{"current encounter is"+@current_encounter.to_s}
+      #Rails.logger.debug{"current encounter is"+@current_encounter.to_s}
       @patientactions=false #disable the patients actions partial
       ensure_encounter_actions
     end

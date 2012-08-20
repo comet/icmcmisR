@@ -1,0 +1,35 @@
+<div class="item">
+  <%if performedtest%>
+    <div class="particulars_left">
+      <p>
+        <b>Test:</b>
+        <%=  Payable.find(performedtest.id) %>
+      </p>
+      <p>
+        <b>Description:</b>
+        <%= performedtest.description %>
+      </p>
+    </div>
+    <div class ="particulars_center">
+      <p><b>Results:</b>
+      <%if !performedtest.results.blank?%>
+        <b><%= performedtest.results %></b>
+      <%else%>
+        <b>No results input</b>
+      <%end%>
+      </p>
+    </div>
+    <div class="particulars_right">
+<p>
+  <b>Comments:</b>
+  <%if !performedtest.comments.blank?%>
+  <%= performedtest.comments %>
+  <%else%>
+  .<b>No comments</b>
+  <%end%>
+</p>
+    </div>
+  <%else%>
+    <div><p class="norecords">No records for tests</p></div>
+  <%end%>
+</div>

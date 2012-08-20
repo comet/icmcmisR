@@ -27,10 +27,11 @@ Icmcmis::Application.routes.draw do
   get "reports/treatments"
   get "reports/users"
   get "reports/payments"
+  get "reports/csv"
+  post "reports/csv"
   get "appointments/index"
-
+  
   get "appointments/show"
-
   get "appointments/destroy"
 
   get "dashboard/index"
@@ -52,6 +53,7 @@ Icmcmis::Application.routes.draw do
   get "sessions/password"
   get "patients/quick_labs"
   post "patients/quick_labs"
+  post "treatments/create"
   resources :payments do
     resources :particulars
   end

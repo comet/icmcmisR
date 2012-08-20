@@ -12,13 +12,13 @@
     </div>
     <%if @current_user%>
       <%= render :partial=> 'layouts/actiontabs' %>
-      <%= render :partial=> 'layouts/logout_link' %>
     <%end%>
     <%= render :partial=> 'layouts/notifications' %>
     <%if @patientactions && @current_patient%>
+      <%= render :partial=> 'layouts/patient_banner' %>
       <%= render :partial=> 'layouts/patientsactions' %>
     <%elsif @pharmacy%>
-    <%= render :partial=> 'layouts/pharmacy_actions' %>
+      <%= render :partial=> 'layouts/pharmacy_actions' %>
     <%elsif @current_encounter%>
       <%= render :partial=> 'layouts/encounter_actions' %>
     <%elsif @current_plan%>
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div id="footer">
-    <div class="footer">&copy;<%=DateTime.now.year.to_s%> Isiolo Central Medical Clinic</div>
+    <div class="footer">&copy;<%=DateTime.now.year.to_s%> Isiolo Central Medical Clinic<div>Powered by e-consult-systems</div></div>
   </div>
 </body>
 </html>

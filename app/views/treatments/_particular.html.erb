@@ -1,4 +1,5 @@
 <div class="item">
+  <%if particular%>
   <div class="particulars_left">
     <%=particular.name%>
   </div>
@@ -16,4 +17,7 @@
             <%=particular.price * particular.quantity%>
           <%end%>
         </div>
+  <%else%>
+  <div><p class="norecords">No records for treatment</p></div>
+  <%end%>
         </div>

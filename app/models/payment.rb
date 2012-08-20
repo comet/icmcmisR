@@ -2,6 +2,7 @@ class Payment < ActiveRecord::Base
   has_many :particulars
   validates :expeccted_amount,:payment_method,:received_by,:amount,:presence=>true
   validate :amount_is_enough
+  acts_as_reportable
   def self.bind_particulars(id,partics)
     parts = partics
     if parts

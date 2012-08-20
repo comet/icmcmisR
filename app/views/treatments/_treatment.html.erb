@@ -1,0 +1,49 @@
+<div class="records">
+<table class="data">
+  <tr>
+    <%if @poly%>
+      <%if @treatment.treatments.size>0%>
+        <%@treatment.treatments.each do |t|%>
+        <tr>
+          <td class="particulars_left">
+            <%begin%>
+              <%=Payable.find(t.payable_id).name%>
+            <%rescue=>exception%>
+            <%end%>
+          </td>
+          <td class ="particulars_center">
+            <%if t.number_per_intake%>
+              <%=t.number_per_intake.to_i%>*<%= t.number_per_day.to_i%> For : <%=t.number_of_days.to_i%> days
+            <%else%>
+            <td>NONE</td>
+          <%end%>
+          </td>
+        <%end%>
+      </tr>
+    <%end%>
+  <%else%>
+    <%if @treatment%>
+
+      <%if @treatment.payable_id%>
+        <td class="particulars_left">
+          <%=Payable.find(@treatment.payable_id).name%>
+        </td>
+        <td class ="particulars_center">
+          <%if @treatment.number_per_intake%>
+            <%=@treatment.number_per_intake.to_i%>*<%= @treatment.number_per_day.to_i%> For : <%=@treatment.number_of_days.to_i%> days
+          <%else%>
+          <td>NONE</td>
+        <%end%>
+      </td>
+    <%end%>
+  <%else%>
+    <%if @treatment.detail%>
+      <td>@treatment.detail</td>
+    <%else%>
+      <td>Unprocessable treatment</td>
+    <%end%>
+  <%end%>
+<%end%>
+</tr>
+</table>
+</div>

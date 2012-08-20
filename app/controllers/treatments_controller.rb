@@ -39,11 +39,14 @@ class TreatmentsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @treatment }
+      format.js{
+        render :layout => false}
     end
   end
 
   # GET /treatments/1/edit
   def edit
+    load_encounter_actions
     @treatment = Treatment.find(params[:id])
   end
 
@@ -51,14 +54,22 @@ class TreatmentsController < ApplicationController
   # POST /treatments.xml
   def create
     @treatment = Treatment.new(params[:treatment])
-
+    #@treatment = Treatment.create(params[:treatment])
+    if request.xhr?
+      Rails.logger.debug{@treatment.inspect}
+    end
     respond_to do |format|
       if @treatment.save
         format.html { redirect_to(@treatment, :notice => 'Treatment was successfully created.') }
         format.xml  { render :xml => @treatment, :status => :created, :location => @treatment }
+        format.js{
+          render :layout => false}
+
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @treatment.errors, :status => :unprocessable_entity }
+        format.js{
+          render :layout => false}
       end
     end
   end

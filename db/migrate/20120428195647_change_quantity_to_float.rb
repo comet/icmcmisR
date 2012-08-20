@@ -4,5 +4,6 @@ class ChangeQuantityToFloat < ActiveRecord::Migration
   end
 
   def self.down
+    remove_column :particulars, :quantity
   end
 end

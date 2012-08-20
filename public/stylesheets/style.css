@@ -13,6 +13,13 @@ body {  margin:0px auto;
         line-height: 1.6em;
 	height: 100%;
 }
+.right{
+    text-align: right;
+}
+.left{
+    text-align: left;
+    text-indent: 5px;
+}
 
 .widget {
     text-align: center;
@@ -193,7 +200,15 @@ a:hover { color: #3c9fd3; }
  width: 100%;
 }
 
-
+.inline {
+    margin: 1px 0;
+    width: 50%;
+    border-spacing: 0px;
+    display: table;
+    border-color: #cdcdcd;
+    padding-top: 1px;
+    padding-left: 5px;
+}
 .data {
     margin: 12px 0;
     width: 90%;

@@ -1,0 +1,3 @@
+$(".new_treatment_item").empty();
+$(".treatment_item").append("<%= escape_javascript(render :partial => @treatment) %>");
+ajaxLinks();

@@ -1,0 +1,25 @@
+<%if@treatments && @treatments.size>0%>
+<table class="data">
+  <tr>
+    <th>Treatments</th>
+  </tr>
+<% @treatments.each do |treatment| %>
+  <tr>
+<%if @poly %>
+    <td><ol>
+  <%treatment.treatments.each do |single_treatment|%>
+    <li><%= link_to single_treatment.detail,single_treatment %></li>
+    <%end%>
+  </ol>
+    </td>
+  <%else%>
+    <td><%=  link_to treatment.detail,treatment%></td>
+    </tr>
+  <%end%>
+<% end %>
+</table>
+<%=will_paginate(@treatments)%>
+<%end%>
+<%if @current_encounter%>
+<%= link_to 'New treatment', new_encounter_treatment_path(@current_encounter),:class=>"button" %>
+<%end%>

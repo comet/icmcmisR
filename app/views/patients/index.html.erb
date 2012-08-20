@@ -10,9 +10,7 @@
 
 <% @patients.each do |patient| %>
   <tr>
-    <%name1=patient.surname.concat(" ").concat(patient.first_name) unless patient.given_name.nil?%>
-    <%names =name1.concat(" ").concat(patient.given_name) unless patient.given_name.nil?%>
-    <td><%= link_to names,patient %></td>
+    <td><%= link_to full_names(patient),patient %></td>
     <td><%= patient.gender %></td>
     <td><%= patient.address %></td>
     <td><%= patient.phone_number %></td>

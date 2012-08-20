@@ -1,22 +1,23 @@
-<div id="newItem">
-<%= form_for(Particular.new,:remote=>true,:url=>"/particulars") do |f| %>
-  <fieldset>
-    <legend>New item</legend>
-    <table>
-      <tr class="field">
-        <td><%= f.hidden_field :payment_id %></td>
-      </tr>
-      <tr class="field">
-        <td><%= f.label :item %></td>
-        <td><%=select(:particular, :payable_id, Payable.all.collect {|t| [ t.name, t.id ] }, {:prompt => 'Select Item'})%></td>
-        <td><%= f.label :quantity %></td>
-        <td><%=f.text_field :quantity,:id=>"quantity"%></td>
-        <td><%= f.submit "add",:class=>"button",:id=>"create"%></td>
-      </tr>
-      <tr class="field">
-        <td><%= f.hidden_field :user_id %></td>
-      </tr>
-    <% end %>
-  </table>
-</fieldset>
+<div>
+    <fieldset>
+      <legend>New item</legend>
+      <table class="inline">
+        <%= form_tag('/treatments',:remote => true,:html=>{:class=>"ajaxForm"}) %>
+        <tr class="field">
+          <td><%= label_tag :item %></td>
+          <td><%=select( "treatment",:payable_id, Payable.all.collect {|t| [ t.name, t.id ] }, {:prompt => 'Select'})%></td>
+          <td><%= label_tag :take %></td>
+          <td><%=text_field_tag :number_per_intake,'',:size=>2%></td>
+          <td><%= label_tag :times %></td>
+          <td><%=text_field_tag :number_per_day,'',:size=>2%></td>
+          <td><%= label_tag :for %></td>
+          <td><%=text_field_tag :number_of_days,'',:size=>2%></td>
+          <td><%= label_tag :days %></td>
+          <td><%= submit_tag("Add")%></td>
+        </tr>
+        <tr class="field">
+          <td><%= hidden_field_tag :patient_id,:value=>@current_patient.id.to_s %></td>
+        </tr>
+    </table>
+  </fieldset>
 </div>

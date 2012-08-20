@@ -68,6 +68,7 @@ class ReportsController < ApplicationController
     if params[:query]
       if params[:query].eql?("daily")
         #
+        @treatments = Treatment.daily_report
       elsif params[:query].eql?("custom")
         redirect_to :action=>'custom',:model=>'treatment'
       else
@@ -152,5 +153,156 @@ class ReportsController < ApplicationController
         @users=User.all
       end
     end
+  end
+  def csv
+    if request.post?
+      #Have the model generate a report
+      model = params[:model]
+      to_date = params[:user][:date_to].nil? ? Time.now.to_date : params[:user][:date_to]
+      from_date = params[:user][:date_from].nil? ? Time.now.to_date : params[:user][:date_from]
+      case model
+      when "patients"
+        @table = Encounter.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["patient.first_name","patient.given_name","patient.surname", "created_at","encounter_type"],
+          :include => { :patient => { :methods => ["first_name","surname"], :only => {}} },
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"}
+        )
+        unless @table.empty?
+          @table.rename_column("patient.first_name", "First")
+          @table.rename_column("patient.surname", "Surname")
+          @table.rename_column("patient.given_name", "Middle")
+          @table.rename_column("created_at","Date")
+          @table.rename_column("encounter_type", "type")
+          @table.rename_columns { |c| c.titleize }
+        end
+      when "encounters"  
+        @table = Encounter.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["patient.first_name","patient.given_name","patient.surname", "created_at","encounter_type","diagnoses.detail","treatments.detail"],
+          :include => { :patient => { :methods => ["first_name","surname"], :only => {}},
+            :diagnoses => { :methods => ["detail"], :only => {}} ,
+            :treatments => { :methods => ["detail"], :only => {}} }, 
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"}
+        )
+        unless @table.empty?
+          @table.rename_column("patient.first_name", "First")
+          @table.rename_column("patient.surname", "Surname")
+          @table.rename_column("patient.given_name", "Middle")
+          @table.rename_column("created_at","Date")
+          @table.rename_column("encounter_type", "type")
+          @table.rename_column("treatments.detail", "treatment")
+          @table.rename_column("diagnoses.detail", "Diagnosis")
+          @table.rename_columns { |c| c.titleize }
+        end
+      when "treatments"
+        @table = Encounter.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["patient.first_name","patient.given_name","patient.surname", "created_at","encounter_type","treatments.detail"],
+          :include => { :patient => { :methods => ["first_name","surname"], :only => {}} ,
+            :treatments => { :methods => ["detail"], :only => {}} } ,
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"})
+        unless @table.empty?
+          @table.rename_column("patient.first_name", "First")
+          @table.rename_column("patient.surname", "Surname")
+          @table.rename_column("patient.given_name", "Middle")
+          @table.rename_column("created_at","Date")
+          @table.rename_column("encounter_type", "Type")
+          @table.rename_column("treatments.detail", "Treatment")
+          @table.rename_columns { |c| c.titleize }
+        end  
+      when "diagnoses"
+        @table = Encounter.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["patient.first_name","patient.given_name","patient.surname", "created_at","encounter_type","diagnoses.detail"],
+          :include => { :patient => { :methods => ["first_name","surname"], :only => {}} ,
+            :diagnoses => { :methods => ["detail"], :only => {}} } ,
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"})
+        unless @table.empty?
+          @table.rename_column("patient.first_name", "First")
+          @table.rename_column("patient.surname", "Surname")
+          @table.rename_column("patient.given_name", "Middle")
+          @table.rename_column("created_at","Date")
+          @table.rename_column("encounter_type", "Type")
+          @table.rename_column("diagnoses.detail", "Diagnoses")
+          @table.rename_columns { |c| c.titleize }
+        end  
+      when "payments"
+        @table = Payment.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["payment_for","expeccted_amount", "amount","created_at","payment_method"],
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"})
+        unless @table.empty?
+          @table.rename_column("payment_method", "Mode")
+          @table.rename_column("payment_for", "Item")
+          @table.rename_column("amount", "Amount")
+          @table.rename_column("created_at","Date")
+          @table.rename_column("expeccted_amount", "Cost")
+          @table.rename_columns { |c| c.titleize }
+        end  
+      when "pharmacy"
+        @table = Drug.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["name","description", "category","price","created_at"],
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"})
+        unless @table.empty?
+          @table.rename_column("name", "Name")
+          @table.rename_column("Description", "Description")
+          @table.rename_column("category", "Category")
+          @table.rename_column("Price","Price")
+          @table.rename_column("created_at", "Date")
+          @table.rename_columns { |c| c.titleize }
+        end
+      when "users"
+        @table = User.report_table(:all,
+          :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
+          :only => ["first_name","middle_name","surname","username","gender","phone_number","email","created_at"],
+          :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"})
+        unless @table.empty?
+          @table.rename_column("first_name", "First")
+          @table.rename_column("surname", "Surname")
+          @table.rename_column("given_name", "Middle")
+          @table.rename_column("gender","Gender")
+          @table.rename_column("email","Email")
+          @table.rename_column("address","Address")
+          @table.rename_column("phone_number","Phone")
+          @table.rename_column("created_at","Date")
+          @table.rename_columns { |c| c.titleize }
+        end
+      end
+      if !@table || @table.empty?
+        flash[:error]="No records were found matching the dates you gave.Please choose an item and a range."
+        redirect_to(:controller =>"reports",:action =>"csv",:query =>model) and return
+      else
+        file_name = "#{model}_report.csv"
+        file = File.open("#{Rails.root.to_s}/#{file_name}", "w") 
+        @table =@table.as(:csv)#convert the table to csv
+        file.print(@table)
+        file.close
+        path = File.join(Rails.root.to_s, file_name)
+        flash[:message]="File successfully downloaded"
+        send_file path,:x_sendfile=>true
+        #redirect_to(:controller => "reports", :action => "index")and return
+      end
+    else
+      if params[:query]
+        @choice = params[:query]
+      else
+        #allow export of the entire database
+      end
+    end
+  end
+  def to_csv(array,name="csv")
+    file_name = "#{name}_report.csv"
+    file = File.open("#{Rails.root.to_s}/#{file_name}", "w") 
+    #write array to csv file
+    
+    file.print(@table)
+    file.close
+    path = File.join(Rails.root.to_s, file_name)
+    flash[:message]="File successfully downloaded"
+    send_file path,:x_sendfile=>true
+    return
+    
   end
 end

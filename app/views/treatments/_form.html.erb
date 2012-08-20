@@ -1,28 +1,26 @@
-<%= form_for(@treatment) do |f| %>
-<fieldset>
-  <legend>New treatment</legend>
-  <table>
-  <% if @treatment.errors.any? %>
-    <tr>
-      <td><%= pluralize(@treatment.errors.count, "error") %> prohibited this treatment from being saved:
-
-      <ul>
-      <% @treatment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-      </td>
-    </tr>
-  <% end %>
-    <tr>
-      <td><%= f.label :detail %></td>
-      <td><%= f.text_area :detail %></td>
-      <td><%= f.hidden_field :encounter_id,:value=>@current_encounter %></td>
-  </tr>
-  <tr>
-    <td><%= f.submit %></td>
-    <td><%= link_to 'Back', encounter_treatments_path(@current_encounter),:class=>"button" %></td>
-  </tr>
-<% end %>
-  </table>
-</fieldset>
+<div id="input_form">
+    <fieldset>
+      <legend>New item</legend>
+      <table class="inline">
+        <%= form_for(Treatment.new,:html=>{:class=>"ajaxForm"}) do |f| %>
+        <tr class="field">
+          <td><%= f.label :item %></td>
+          <td><%=f.select(:payable_id, Payable.all.collect {|t| [ t.name, t.id ] }, {:prompt => 'Select'})%></td>
+          <td><%= f.label :take %></td>
+          <td><%=f.text_field :number_per_intake,:size=>2%></td>
+          <td><%= f.label :times %></td>
+          <td><%=f.text_field :number_per_day,:size=>2%></td>
+          <td><%= f.label :for %></td>
+          <td><%=f.text_field :number_of_days,:size=>2%></td>
+          <td><%= f.label :days %></td>
+          <td><%= f.submit("Prescribe")%></td>
+        </tr>
+        <tr class="field">
+          <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_s %></td>
+          <td><%= f.hidden_field :encounter_id,:value=>@current_encounter.to_s %></td>
+          <td><%= f.hidden_field :treated_by,:value=>@current_user.id.to_s %></td>
+        </tr>
+        <%end%>
+    </table>
+  </fieldset>
+</div>

@@ -10,6 +10,8 @@
   </tr>
 <% end %>
 </table>
+<%else%>
+<div><p class="norecords">No records</p></div>
 <%end%>
 <%if @current_encounter%>
 <%= link_to 'New Treatment', new_encounter_treatment_path(@current_enocunter),:class=>"button" %>

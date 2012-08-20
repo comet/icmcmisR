@@ -1,6 +1,6 @@
 <% if encounter%>
 <div class="records">
-  <fieldset><strong>Date of visit:</strong> <%=  encounter.created_at.to_date%></fieldset>
+  <fieldset><table><tr><td><strong>Date of visit:</strong> <%=  encounter.created_at.to_date%></td><td><div class="right"><strong>Patient:</strong> <%=  full_names(Patient.find(@current_patient.id))%></div></td></tr></table></fieldset>
   <div>
     <table class="data">
       <thead>
@@ -58,9 +58,9 @@
                                           </thead>
                                           <tr>
                                             <%if encounter.treatments.size>0%>
-                                              <td><ul><%encounter.treatments.each do |treatment|%>
-                                                    <li><%= treatment.detail %></li>
-                                                  <%end%></ul></td>
+                                              <td>
+                                                <%= render :partial => "treatments/treatment", :collection => encounter.treatments, :as => :@treatment,:spacer_template=>"encounters/spacer"%>
+                                              </td>
                                             <%else%>
                                               <td>No treatments</td>
                                             <%end%>

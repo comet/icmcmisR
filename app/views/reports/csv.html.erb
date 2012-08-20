@@ -1,0 +1,10 @@
+<%=form_tag%>
+<fieldset>
+  <legend>Export <%=@choice %> to CSV format</legend>
+  <table>
+    <%=render :partial=>'date_fields'%>
+    <tr>
+      <td><%=hidden_field_tag :model,@choice%></td>
+      <td><%=submit_tag :export%></td></tr>
+  </table>
+</fieldset>

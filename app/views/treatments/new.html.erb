@@ -1,1 +1,21 @@
-<%= render 'form' %>
+  <fieldset>
+    <legend>New treatments</legend>
+    <table>
+      <div class="treatment_item">
+        
+      </div>
+    </table>
+    <table>
+      <tr><td><div class="new_treatment_item">
+          </div></td></tr>
+    </table>
+    <table>
+      <tr>  <td><p class="button"><%=link_to "Add treatment","/treatments/new?category=1",:class=>"get",:id=>"add_treatment"%></p></td>
+        <td><p class="button"><%=link_to "Add Injection","#",:id=>"add_injection"%></p></td>
+        <td><p class="button"><%=link_to "Add Dressing","#",:id=>"add_dressing"%></p></td>
+      </tr>
+      <tr>
+        <td><%= link_to 'Back', encounter_treatments_path(@current_encounter),:class=>"button" %></td>
+      </tr>
+  </table>
+</fieldset>
