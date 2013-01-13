@@ -1,0 +1,45 @@
+<%= form_for(@disbursednhif) do |f| %>
+<fieldset>
+    <legend>New NHIF Disbursement</legend>
+    <table>
+  
+  <% if @disbursednhif.errors.any? %>
+      <tr>
+    <!--<div id="error_explanation">-->
+      <td><%= pluralize(@disbursednhif.errors.count, "error") %> prohibited this disbursednhif from being saved:
+
+      <ul>
+      <% @disbursednhif.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <td><%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :start_date %></td>
+    <td><%= f.datepicker :start_date %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :end_date %></td>
+    <td><%= f.datepicker :end_date %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :amount %></td>
+    <td><%= f.text_field :amount %></td>
+  </tr>
+  <tr>
+        <td><%= f.hidden_field :created_by,:value=>@current_user.id.to_i %></td>
+      </tr>
+
+  <tr>
+    <td>  <%= f.submit :post_disbursement %></td>
+  </tr>
+<% end %>
+    </table>
+</fieldset>

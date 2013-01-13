@@ -1,0 +1,29 @@
+<div id="records">
+<p>
+  <b>Name:</b>
+  <%= @disbursednhif.name %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @disbursednhif.start_date.to_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @disbursednhif.end_date.to_date %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @disbursednhif.amount %>
+</p>
+
+<p>
+  <b>Created by:</b>
+  <%= @disbursednhif.created_by %>
+</p>
+</div>
+<%= link_to 'Edit', edit_disbursednhif_path(@disbursednhif), :class=>"button"%> 
+<%= link_to 'Delete', @disbursednhif, :confirm => 'Are you sure?', :method => :delete,:class=>"button" %>
+<%= link_to 'Back', disbursednhifs_path, :class=>"button"%>

@@ -66,7 +66,10 @@
         <td><%= label_tag(:alive, "Is alive") %></td>
         <td><%= f.check_box :alive,{:checked=>true} %></td>
       </tr>
-
+      <tr>
+        <td><%= label_tag(:nhif, "NHIF") %></td>
+        <td><%= f.check_box :nhif,@patient.nhif==1?{:checked=>true} : {:checked=>false} %></td>
+      </tr>
       <!--<div class="actions">-->
       <tr>
         <td><%= f.submit %></td>

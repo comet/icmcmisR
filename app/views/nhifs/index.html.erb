@@ -1,0 +1,30 @@
+<%  if @nhifs and @nhifs.size > 0%>
+<%if @patient%>
+<h1>Listing <%=@patient.surname%> NHIF transactions</h1>
+<h1>Current balance: <%=@balance%></h2>
+<%else%>
+<h1>Listing all NHIF transactions</h1>
+<%end%>
+<table class="data">
+  <tr>
+    <th>Patient</th>
+    <th>Encounter</th>
+    <th>Disbursement</th>
+    <th>Amount charged</th>
+    <th>Date</th>
+  </tr>
+<% @nhifs.each do |nhif| %>
+  <tr>
+    <td><%= link_to @patient.surname,nhif %></td>
+    <td><%= nhif.encounter_id.nil?? "None": (Encounter.find(nhif.encounter_id).complains)%></td>
+    <td><%= Disbursednhif.find(nhif.disbursement_id).name %></td>
+    <td><%= nhif.amount_charged %></td>
+    <td><%= nhif.date.to_date %></td>
+  </tr>
+<% end %>
+</table>
+<%else%>
+<div class="norecords">NO NHIF RECORDS <%=@patient? " FOR "+@patient.surname : ""%></div>
+<%end%>
+<br/>
+<%= link_to 'Update NHIF records', new_nhif_path,:class=>"button" %>

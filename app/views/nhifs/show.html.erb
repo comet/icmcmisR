@@ -1,0 +1,18 @@
+<div id="records">
+<p>
+  <b>Patient:</b>
+  <%= @current_patient.surname %>
+</p>
+<p>
+  <b>Amount charged:</b>
+  <%= @nhif.amount_charged %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @nhif.date.to_date %>
+</p>
+</div>
+
+<%= link_to 'Edit', edit_nhif_path(@nhif),:class=>"button" %>
+<%= link_to 'Back', nhifs_path,:class=>"button" %>

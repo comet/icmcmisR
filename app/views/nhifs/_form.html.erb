@@ -1,0 +1,43 @@
+<%= form_for(@nhif) do |f| %>
+<fieldset>
+    <legend>New NHIF deduction for <%=@current_patient.surname%></legend>
+    <table>
+      
+  <% if @nhif.errors.any? %>
+    <tr id="error_explanation">
+      <td><%= pluralize(@nhif.errors.count, "error") %> prohibited this nhif from being saved:
+
+      <ul>
+      <% @nhif.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <td><%= f.hidden_field :patient_id,:value=>@current_patient.id.to_i %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :encounter %></td>
+    <td><%= f.select(:encounter_id, Encounter.where("patient_id = '#{@current_patient.id}'").collect {|e| [ e.complains+" FOR "+e.created_at.to_date.to_s, e.id ] }, {:include_blank => 'None'})%></td>
+  </tr>
+  <tr>
+    <td><%= f.label :disbursement_id %></td>
+    <td><%= f.label Disbursednhif.last.name %></td>
+    <td><%= f.hidden_field :disbursement_id,:value=>Disbursednhif.last.id %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :amount_charged %></td>
+    <td><%= f.text_field :amount_charged %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :date %></td>
+    <td><%= f.datepicker :date %></td>
+  </tr>
+  <tr>
+    <td><%= f.submit "create Deduction" %></td>
+  </tr>
+<% end %>
+    </table>
+</fieldset>
