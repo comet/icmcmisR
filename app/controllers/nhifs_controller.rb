@@ -9,9 +9,15 @@ class NhifsController < ApplicationController
     pivot = Pivotnhif.where("patient_id = ? AND disbursement_id = ?", params[:patient_id], disb_id)
     @balance = pivot.first.current_balance
       load_patient_actions
-      Rails.logger.debug{@current_patient.inspect}
+      #Rails.logger.debug{@current_patient.inspect}
     else
-      @nhifs = Nhif.all
+      if params[:full]
+        @full = true
+        @nhifs = Nhif.all
+      else
+      @nhifs = Nhif.daily
+      end
+      #Rails.logger.debug{@nhifs.inspect}
     end
     
 
@@ -56,7 +62,11 @@ class NhifsController < ApplicationController
       amount = params[:nhif][:amount_charged]
     if !Nhif.validate_amount(patient, amount.to_f)
       #format.html { 
-      redirect_to :action=>new
+      redirect_to(@nhif, :error => 'Nhif patient limit has been exceeded.') and return
+    end
+    if !Nhif.ensure_disbursement_limit( amount.to_f)
+      #format.html { 
+       redirect_to(@nhif, :error => 'Nhif limit has been exceeded.') and return
     end
     respond_to do |format|
       if @nhif.save

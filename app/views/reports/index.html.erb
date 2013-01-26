@@ -28,6 +28,12 @@
   <%=link_to 'Custom User reports',"#" %><br/>
   <%=link_to 'Export to CSV',:controller=>"reports",:action=>"csv",:query=>"users"%><br/>
 </div>
+<div id="nhifreports"class="reportsoptions">
+  <%=link_to 'Daily NHIF Payments',:controller=>"reports",:action=>"nhif",:query=>"daily"%><br/>
+  <%=link_to 'Custom NHIF Payments report',:controller=>"reports",:action=>"nhif",:query=>"custom"%><br/>
+  <%=link_to 'Export Daily NHIF to CSV',:controller=>"reports",:action=>"nhif",:query=>"dailynhif"%><br/>
+  <%=link_to 'Export to CSV',:controller=>"reports",:action=>"csv",:query=>"allnhif"%><br/>
+</div>
 <div id="paymentsreports"class="reportsoptions">
   <%=link_to 'Daily Payments',:controller=>"reports",:action=>"payments",:query=>"daily"%><br/>
   <%=link_to 'Custom Payments report',:controller=>"reports",:action=>"payments",:query=>"custom"%><br/>

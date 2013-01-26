@@ -1,5 +1,9 @@
 Icmcmis::Application.routes.draw do
 
+  resources :nhifs
+
+  resources :disbursednhifs
+
   resources :stockretakes
 
   resources :appointments
@@ -28,6 +32,7 @@ Icmcmis::Application.routes.draw do
   get "reports/users"
   get "reports/payments"
   get "reports/csv"
+  get "reports/nhif"
   post "reports/csv"
   get "appointments/index"
   

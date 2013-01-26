@@ -34,6 +34,10 @@
     <td><%= f.text_field :amount %></td>
   </tr>
   <tr>
+    <td><%= f.label :limit %></td>
+    <td><%= f.text_field :limit %></td>
+  </tr>
+  <tr>
         <td><%= f.hidden_field :created_by,:value=>@current_user.id.to_i %></td>
       </tr>
 

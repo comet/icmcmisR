@@ -3,7 +3,11 @@
 <h1>Listing <%=@patient.surname%> NHIF transactions</h1>
 <h1>Current balance: <%=@balance%></h2>
 <%else%>
+<%if @full%>
 <h1>Listing all NHIF transactions</h1>
+<%else%>
+<h1>Listing daily transactions</h1>
+<%end%>
 <%end%>
 <table class="data">
   <tr>
@@ -13,18 +17,41 @@
     <th>Amount charged</th>
     <th>Date</th>
   </tr>
+  <% total = 0 %>
 <% @nhifs.each do |nhif| %>
+  
   <tr>
-    <td><%= link_to @patient.surname,nhif %></td>
+    <td><%= link_to @patient.nil? ? (Patient.find(nhif.patient_id).surname) : @patient.surname,nhif %></td>
+    
     <td><%= nhif.encounter_id.nil?? "None": (Encounter.find(nhif.encounter_id).complains)%></td>
     <td><%= Disbursednhif.find(nhif.disbursement_id).name %></td>
     <td><%= nhif.amount_charged %></td>
     <td><%= nhif.date.to_date %></td>
   </tr>
+  <%  total =total+nhif.amount_charged %>
 <% end %>
+  <tr>
+    <td>TOTAL</td>
+    <td></td>
+    <td></td>
+    <td><%=total.to_s%>  </td>
+  </tr>
 </table>
+<% if !@full%>
+  <div class="norecords">DAILY TOTAL =  <%=total.to_s %></div>
+  <%= link_to 'Full records', nhifs_path,:full=>1,:class=>"button" %>
+  <% else %>
+  <%= link_to 'Daily NHIF records', nhifs_path,:class=>"button" %>
+<%  end
+%>
 <%else%>
-<div class="norecords">NO NHIF RECORDS <%=@patient? " FOR "+@patient.surname : ""%></div>
+<div class="norecords">NO RECORDS FOUND <%=@patient? " FOR "+@patient.surname : ""%>
+<% if !@full%>
+  <%= link_to 'All NHIF records', nhifs_path(:full=>1),:class=>"button" %>
+<% end %>
+</div>
 <%end%>
 <br/>
+<%if @patient%>
 <%= link_to 'Update NHIF records', new_nhif_path,:class=>"button" %>
+<%end%>

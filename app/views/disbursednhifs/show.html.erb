@@ -21,7 +21,7 @@
 
 <p>
   <b>Created by:</b>
-  <%= @disbursednhif.created_by %>
+  <%=  User.find(@disbursednhif.created_by).surname %>
 </p>
 </div>
 <%= link_to 'Edit', edit_disbursednhif_path(@disbursednhif), :class=>"button"%> 

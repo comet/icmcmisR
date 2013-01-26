@@ -7,7 +7,6 @@ class Nhif < ActiveRecord::Base
     disb_id = Disbursednhif.last.id
     
     pivot = Pivotnhif.where("patient_id = ? AND disbursement_id = ?", p_id, disb_id)
-    
     #pivot.first.current_balance
     #Rails.logger.debug{pivot.first.current_balance}
     expected_amount = pivot.first.current_balance
@@ -27,5 +26,25 @@ class Nhif < ActiveRecord::Base
     new_balance = expected_amount-amount
     
     Pivotnhif.update_all({:current_balance=> new_balance},["patient_id = ? AND disbursement_id = ?", p_id, disb_id])
+  end
+  def self.daily
+    time_range = (Time.zone.now.midnight)..(Time.zone.now.midnight+1.day)
+    where('created_at'=>time_range).all
+  end
+  def self.ensure_disbursement_limit(amount_requested)
+    #all the nhif payments under this scheme should not exceed a certain amount
+    disb = Disbursednhif.last
+    limit = disb.limit
+    pivot = Nhif.where("disbursement_id = ?", disb.id)
+    amount = 0
+     if pivot && pivot.size >0
+       pivot.each do |piv|
+         amount = amount + piv.amount_charged
+       end
+     end
+     limit_user = limit - amount
+    if limit_user < amount_requested
+      false
+    end
   end
 end
