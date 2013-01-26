@@ -21,18 +21,24 @@ class Disbursednhif < ActiveRecord::Base
   end
   def self.update_pivot_individual(patient_id)
     disb = Disbursednhif.last
-    id = disb.id
-    amount =disb.amount
-    patient = {:patient_id=>patient_id,
-      :disbursement_id=>id, 
-      :initial_amount=>amount,
-      :current_balance=>amount
-    }
-    @pivot = Pivotnhif.new(patient)
-    if !@pivot.save
-      Rails.logger.error{"Failed saving a pivot nhif record"}
-      Rails.logger.error{@pivot}
+    if disb
+      id = disb.id
+      amount =disb.amount      
+      patient = {:patient_id=>patient_id,
+        :disbursement_id=>id, 
+        :initial_amount=>amount,
+        :current_balance=>amount
+      }
+      @pivot = Pivotnhif.new(patient)
+      if !@pivot.save
+        Rails.logger.error{"Failed saving a pivot nhif record"}
+        Rails.logger.error{@pivot}
+      end
+      true
+    else
+      Rails.logger.error{"No disbursement in place,failed saving the record"}
     end
-    true
+    
+    
   end
 end
