@@ -1,5 +1,6 @@
 class Nhif < ActiveRecord::Base
 #validate :valid_amount
+acts_as_reportable
   def self.this_patient(id)
     where("patient_id = '#{id}'")
   end

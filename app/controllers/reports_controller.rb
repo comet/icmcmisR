@@ -310,21 +310,17 @@ class ReportsController < ApplicationController
       #use fixed date for the daily report
       from_date = Time.zone.now.midnight
       to_date = Time.zone.now.midnight+1.day
-      @table = User.report_table(:all,
+      @table = Nhif.report_table(:all,
           :conditions => ["created_at >='#{from_date.to_date}'AND created_at <= '#{to_date.to_date}'"],
-          :only => ["first_name","middle_name","surname","username","gender","phone_number","email","created_at"],
+          :only => ["patient_id","amount_charged","created_at"],
           :transforms=>lambda{|r|r["created_at"] = "#{r["created_at"].to_date}"})
         unless @table.empty?
-          @table.rename_column("first_name", "First")
-          @table.rename_column("surname", "Surname")
-          @table.rename_column("given_name", "Middle")
-          @table.rename_column("gender","Gender")
-          @table.rename_column("email","Email")
-          @table.rename_column("address","Address")
-          @table.rename_column("phone_number","Phone")
+          @table.rename_column("patient_id","Patient Code")
+          @table.rename_column("amount_charged","Amount")
           @table.rename_column("created_at","Date")
           @table.rename_columns { |c| c.titleize }
         end
+        @nhifs = Nhif.daily
         file_name = "daily_nhif_report.csv"
         file = File.open("#{Rails.root.to_s}/#{file_name}", "w") 
         @table =@table.as(:csv)#convert the table to csv
