@@ -6,8 +6,8 @@ class NhifsController < ApplicationController
       @patient = Patient.find(params[:patient_id])
       @nhifs = Nhif.this_patient(params[:patient_id])
       disb_id = Disbursednhif.last.id
-    pivot = Pivotnhif.where("patient_id = ? AND disbursement_id = ?", params[:patient_id], disb_id)
-    @balance = pivot.first.current_balance
+      pivot = Pivotnhif.where("patient_id = ? AND disbursement_id = ?", params[:patient_id], disb_id)
+      @balance = pivot.first.current_balance
       load_patient_actions
       #Rails.logger.debug{@current_patient.inspect}
     else
@@ -15,7 +15,7 @@ class NhifsController < ApplicationController
         @full = true
         @nhifs = Nhif.all
       else
-      @nhifs = Nhif.daily
+        @nhifs = Nhif.daily
       end
       #Rails.logger.debug{@nhifs.inspect}
     end
@@ -59,14 +59,16 @@ class NhifsController < ApplicationController
   def create
     @nhif = Nhif.new(params[:nhif])
     patient = params[:nhif][:patient_id]
-      amount = params[:nhif][:amount_charged]
+    amount = params[:nhif][:amount_charged]
     if !Nhif.validate_amount(patient, amount.to_f)
-      #format.html { 
-      redirect_to(@nhif, :error => 'Nhif patient limit has been exceeded.') and return
+      
+      flash[:error] ='Nhif patient limit has been exceeded.'
+      redirect_to(:controller=>"nhifs",:action=>'new' ) and return
+      
     end
     if !Nhif.ensure_disbursement_limit( amount.to_f)
-      #format.html { 
-       redirect_to(@nhif, :error => 'Nhif limit has been exceeded.') and return
+      flash[:error] ='Nhif limit has been exceeded.'
+      redirect_to(:controller=>"nhifs",:action=>'new' ) and return
     end
     respond_to do |format|
       if @nhif.save

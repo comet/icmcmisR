@@ -29,6 +29,8 @@
   <%=link_to 'Export to CSV',:controller=>"reports",:action=>"csv",:query=>"users"%><br/>
 </div>
 <div id="nhifreports"class="reportsoptions">
+  <%=link_to 'All NHIF Payments',:controller=>"nhifs",:action=>"index",:full=>"1"%><br/>
+  <%=link_to 'NHIF Disbursements',:controller=>"disbursednhifs",:action=>"index"%><br/>
   <%=link_to 'Daily NHIF Payments',:controller=>"reports",:action=>"nhif",:query=>"daily"%><br/>
   <%=link_to 'Custom NHIF Payments report',:controller=>"reports",:action=>"nhif",:query=>"custom"%><br/>
   <%=link_to 'Export Daily NHIF to CSV',:controller=>"reports",:action=>"nhif",:query=>"dailynhif"%><br/>

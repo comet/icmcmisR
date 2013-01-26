@@ -31,6 +31,9 @@ class Nhif < ActiveRecord::Base
     time_range = (Time.zone.now.midnight)..(Time.zone.now.midnight+1.day)
     where('created_at'=>time_range).all
   end
+  def self.this_disbursement(disb_id)
+    where("disbursement_id = ?", disb_id)
+  end
   def self.ensure_disbursement_limit(amount_requested)
     #all the nhif payments under this scheme should not exceed a certain amount
     disb = Disbursednhif.last
@@ -45,6 +48,8 @@ class Nhif < ActiveRecord::Base
      limit_user = limit - amount
     if limit_user < amount_requested
       false
+    else
+      true
     end
   end
 end

@@ -20,10 +20,16 @@
 </p>
 
 <p>
+  <b>Limit:</b>
+  <%= @disbursednhif.limit %>
+</p>
+
+<p>
   <b>Created by:</b>
   <%=  User.find(@disbursednhif.created_by).surname %>
 </p>
 </div>
+<%= render :partial=>'beneficiaries' %>
 <%= link_to 'Edit', edit_disbursednhif_path(@disbursednhif), :class=>"button"%> 
 <%= link_to 'Delete', @disbursednhif, :confirm => 'Are you sure?', :method => :delete,:class=>"button" %>
 <%= link_to 'Back', disbursednhifs_path, :class=>"button"%>

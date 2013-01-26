@@ -1,0 +1,36 @@
+<%  if @nhifs and @nhifs.size > 0%>
+<table class="data">
+  <tr>
+    <th>Patient</th>
+    <th>Encounter</th>
+    <th>Disbursement</th>
+    <th>Amount charged</th>
+    <th>Date</th>
+  </tr>
+  <% total = 0 %>
+<% @nhifs.each do |nhif| %>
+  
+  <tr>
+    <td><%= link_to @patient.nil? ? (Patient.find(nhif.patient_id).surname) : @patient.surname,nhif %></td>
+    
+    <td><%= nhif.encounter_id.nil?? "None": (Encounter.find(nhif.encounter_id).complains)%></td>
+    <td><%= Disbursednhif.find(nhif.disbursement_id).name %></td>
+    <td><%= nhif.amount_charged %></td>
+    <td><%= nhif.date.to_date %></td>
+  </tr>
+  <%  total =total+nhif.amount_charged %>
+<% end %>
+  <tr>
+    <td>TOTAL</td>
+    <td></td>
+    <td></td>
+    <td><%=total.to_s%>  </td>
+  </tr>
+  <tr>
+    <td>BALANCE</td>
+    <td></td>
+    <td></td>
+    <td><%=  (@disbursednhif.limit) - total%>  </td>
+  </tr>
+</table>
+<%end%>

@@ -135,6 +135,9 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
+        if !Disbursednhif.update_pivot_individual(@patient.id)
+          Rails.logger.error{"Failed updating the nhif records"}
+        end
         format.html { redirect_to(@patient, :notice => 'Patient was successfully created.') }
         format.xml  { render :xml => @patient, :status => :created, :location => @patient }
       else
