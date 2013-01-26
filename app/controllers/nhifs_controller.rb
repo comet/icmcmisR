@@ -5,8 +5,12 @@ class NhifsController < ApplicationController
     if params[:patient_id]
       @patient = Patient.find(params[:patient_id])
       @nhifs = Nhif.this_patient(params[:patient_id])
-      
-      disb_id = Disbursednhif.last.id
+      if !Disbursednhif.last.nil?
+        disb_id = Disbursednhif.last.id
+      else
+        disb_id = 0
+      end
+      Rails.logger.debug{disb_id}
       if disb_id && disb_id > 0
         pivot = Pivotnhif.where("patient_id = ? AND disbursement_id = ?", params[:patient_id], disb_id)
         @balance = pivot.first.current_balance
